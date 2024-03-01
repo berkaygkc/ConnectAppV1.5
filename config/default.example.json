@@ -1,0 +1,59 @@
+{
+  "port": 3000,
+  "apikey": "",
+  "jwt": {
+    "secret": ""
+  },
+  "instances": {
+    "user": {
+      "url": "",
+      "key": ""
+    },
+    "integrator": {
+      "url": "",
+      "key": ""
+    },
+    "notification": {
+      "url": "",
+      "key": ""
+    },
+    "redis": {
+      "url": ""
+    },
+    "kurulus": {
+      "url": ""
+    }
+  },
+  "database": {
+    "IP": "",
+    "NAME": "",
+    "USER": "",
+    "PASS": ""
+  },
+  "settings": {
+    "queues": {
+      "startSendingInvoiceProcess": {
+        "concurrency": 1,
+        "removeOnComplete": {
+          "age": 3600,
+          "count": 5000
+        },
+        "removeOnFail": {
+          "age": 10800,
+          "count": 20000
+        }
+      },
+      "sendInvoiceToIntegratorService": {
+        "concurrency": 50,
+        "removeOnComplete": {
+          "age": 3600,
+          "count": 5000
+        },
+        "removeOnFail": {
+          "age": 10800,
+          "count": 20000
+        }
+      }
+    }
+  }
+}
