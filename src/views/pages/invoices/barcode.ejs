@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            border-style: solid;
+            padding: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+        p {
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .alici {
+            border-style: dotted;
+            padding: 5px;
+        }
+
+        .barkod-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #barkod {
+            display: block;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        td,
+        th {
+            border: 1px solid #000;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr {
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Kargo Bilgileri</h1>
+    <div class="barkod-container">
+        <canvas id="barkod" width="200" height="100"></canvas>
+    </div>
+    <div class="alici">
+        <p><%= data.receiver.address %></p>
+        <hr>
+        <p><%= data.receiver.name %></p>
+    </div>
+    <table>
+        <tr>
+            <th>Ürün</th>
+            <th>Miktar</th>
+        </tr>
+        <% data.lines.forEach(function(line) { %>
+        <tr>
+            <td><%= line.name %></td>
+            <td><%= line.quantity %> <%= line.unit %></td>
+        </tr>
+        <% }); %>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js" integrity="sha512-QEAheCz+x/VkKtxeGoDq6nsGyzTx/0LMINTgQjqZ0h3+NjP+bCsPYz3hn0HnBkGmkIFSr7QcEZT+KyEM7lbLPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        JsBarcode("#barkod", "<%= data.barcode %>", {
+            format: "CODE128",
+            width: 3,
+            height: 70,
+            margin: 0,
+            lineColor: "#000"
+        });
+    </script>
+</body>
+
+</html>

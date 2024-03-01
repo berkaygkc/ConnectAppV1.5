@@ -1,0 +1,32 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <!-- Content -->
+
+    <!--Under Maintenance -->
+    <div class="container-xxl container-p-y">
+        <div class="misc-wrapper">
+            <h2 class="mb-1 mx-2">Sayfa Bulunamadı 🕵🏻‍♀️</h2>
+            <p class="mb-4 mx-2">Haydaa! 😖 Ne yazık ki ulaşmak istediğiniz sayfa bulunmuyor.</p>
+            <a href="/" class="btn btn-primary mb-4">Ana Sayfaya Dön</a>
+            <div class="mt-4">
+                <img src="/img/illustrations/page-misc-under-maintenance.png" alt="page-misc-under-maintenance" width="550" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid misc-bg-wrapper misc-under-maintenance-bg-wrapper">
+        <img src="/img/illustrations/bg-shape-image-light.png" alt="page-misc-under-maintenance" data-app-light-img="illustrations/bg-shape-image-light.png" data-app-dark-img="illustrations/bg-shape-image-dark.png" />
+    </div>
+    <!-- /Under Maintenance -->
+
+    <!-- / Content -->
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>

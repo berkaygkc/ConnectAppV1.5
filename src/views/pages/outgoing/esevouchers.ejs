@@ -1,0 +1,274 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <div class="layout-page">
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/outgoing/einvoices">e-Faturalar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/outgoing/earchives">e-Arşivler</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/outgoing/edespatches">e-İrsaliyeler</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/outgoing/esevouchers">e-SM Makbuzları</a>
+                            </li>
+                        </ul>
+                        <div class="card">
+                            <div class="card-body demo-vertical-spacing demo-only-element pb-0">
+                                <div class="row col-12 justify-content-end">
+                                    <div class="col-12 col-md-6 mt-md-0 mt-1 d-grid">
+                                        <h4 class="fw-bold py-1 mb-0">
+                                            <span class="text-muted fw-light">Giden Kutusu /</span> Giden e-SM Makbuzları
+                                        </h4>
+                                    </div>
+                                    <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-label-success dropdown-toggle hide-arrow waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-file-export fa-xs me-1"></i> Dışarı Aktar</button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a id="coll-pdf-download" class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-file-pdf fa-xl me-2"></i>Toplu PDF</a></li>
+                                                <li>
+                                                    <a id="coll-pdf-one-page-download" class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-file-pdf fa-xl me-2"></i>Tek Sayfa PDF</a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a id="coll-xml-download" class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-file-code fa-xl me-2"></i>Toplu XML</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a id="coll-sevoucher-xlsx-download" class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-file-excel fa-xl me-2"></i>e-SMM Bazlı Excel</a></li>
+                                                <!-- <li><a class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-file-excel fa-xl me-2"></i>Kalem Bazlı Excel</a></li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-label-linkedin dropdown-toggle hide-arrow waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-list fa-xs me-1"></i> Toplu İşlemler</button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a id="coll-mark-read" class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-envelope-open fa-xl me-2"></i>Okundu Olarak İşaretle</a></li>
+                                                <li><a id="coll-mark-unread" class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-envelope fa-xl me-2"></i>Okun<b>ma</b>dı Olarak İşaretle</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a id="coll-mark-print" class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-print fa-xl me-2"></i>Yazdırıldı Olarak İşaretle</a></li>
+                                                <li><a id="coll-mark-unprint" class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-print fa-xl me-2"></i>Yazdırıl<b>ma</b>dı Olarak İşaretle</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12">
+                                    <div class="col-12 col-md-3 mt-1">
+                                        <label class="form-label" for="searchbox">Ara</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i style="font-size: 0.8rem;" class="fa-solid fa-magnifying-glass fa-xs"></i></span>
+                                            <input id="searchbox" type="text" class="form-control" placeholder="Ara...">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mt-1">
+                                        <label class="form-label" for="fdate">Başlangıç Tarihi</label>
+                                        <div class="input-group">
+                                            <button class="btn btn-label-primary waves-effect" type="button" id="previousMonth" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-primary" data-bs-original-title="Önceki Ay"><i class="fa-solid fa-circle-chevron-left fa-lg"></i></button>
+                                            <input id="fdate" type="text" class="form-control" placeholder="Başlangıç Tarihi">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mt-1">
+                                        <label class="form-label" for="ldate">Bitiş Tarihi</label>
+                                        <div class="input-group">
+                                            <input id="ldate" type="text" class="form-control" placeholder="Bitiş Tarihi">
+                                            <button class="btn btn-label-primary waves-effect" type="button" id="nextMonth" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-primary" data-bs-original-title="Sonraki Ay"><i class="fa-solid fa-circle-chevron-right fa-lg"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-1 mt-1 d-grid pt-4">
+                                        <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
+                                            <i class="fa-solid fa-filter fa-xs me-1"></i>
+                                            <i class="fa-solid fa-arrow-down-wide-short fa-xs"></i>
+                                        </button>
+                                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
+                                            <div class="offcanvas-header">
+                                                <h5 id="offcanvasEndLabel" class="offcanvas-title">Filtrele / Sırala</h5>
+                                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                            </div>
+                                            <div class="offcanvas-body my-auto mx-0 pt-0">
+                                                <div class="divider divider-primary mb-0">
+                                                    <div class="divider-text">Sıralama</div>
+                                                </div>
+                                                <div class="col-12 mb-4">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <label for="order" class="form-label">Sıralama Sutünu</label>
+                                                            <select id="order" class="form-select">
+                                                                <option value="received_at" selected>Eklenme Tarihi</option>
+                                                                <option value="issue_date">e-SMM Tarihi</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="dir" class="form-label">Yönü</label>
+                                                            <select id="dir" class="form-select">
+                                                                <option value="desc" selected>Azalan</option>
+                                                                <option value="asc">Artan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="divider divider-primary mb-0">
+                                                    <div class="divider-text">Filtreleme</div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="status" class="form-label">e-SMM Durumu</label>
+                                                    <select id="status" class="form-select">
+                                                        <option value="2001">Belge işleniyor</option>
+                                                        <option value="2007">Belge raporu gönderilecek</option>
+                                                        <option value="2008">Belge raporu gönderildi</option>
+                                                        <option value="2009">Belge İPTAL edildi</option>
+                                                    </select>
+                                                </div>
+                                                <!-- <div class="col-12 mt-2">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="type" class="form-label">e-SMM Tipi</label>
+                                                            <select id="type" class="form-select">
+                                                                <option value="SATIS">Satış e-SMM</option>
+                                                                <option value="IADE">İade e-SMM</option>
+                                                                <option value="ISTISNA">İstisna e-SMM</option>
+                                                                <option value="TEVKIFAT">Tevkifatlı e-SMM</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="col-12 mt-2">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <label for="read_status" class="form-label">Okunma Durumu</label>
+                                                            <select id="read_status" class="form-select">
+                                                                <option value="" selected>Tümü</option>
+                                                                <option value="true">Okundu</option>
+                                                                <option value="false">Okunmadı</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="print_status" class="form-label">Yazdırılma Durumu</label>
+                                                            <select id="print_status" class="form-select">
+                                                                <option value="" selected>Tümü</option>
+                                                                <option value="true">Yazdırıldı</option>
+                                                                <option value="false">Yazdırılmadı</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-12 d-grid mt-5">
+                                                    <button id="submit-fo" type="button" class="btn btn-linkedin waves-effect">
+                                                        Uygula
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-2 mt-1 d-grid pt-4">
+                                        <button id="search-button" type="button" class="btn btn-linkedin waves-effect">
+                                            <i class="fa-solid fa-magnifying-glass fa-xs me-1"></i> Ara
+                                        </button>
+                                    </div>
+                                    <div id="filter-tags-div" class="col-12 mt-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="table-div" class="card-datatable dataTable_select text-nowrap table-responsive">
+                                <table class="table table-xs" id="sevouchers" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th style="font-size: 0.75rem;">İşlem</th>
+                                            <th style="font-size: 0.75rem;">printed</th>
+                                            <th style="font-size: 0.75rem;">e-SMM</th>
+                                            <th style="font-size: 0.75rem;">type</th>
+                                            <th style="font-size: 0.75rem;">profile</th>
+                                            <th style="font-size: 0.75rem;">Alıcı</th>
+                                            <th style="font-size: 0.75rem;">receiver_tax</th>
+                                            <th style="font-size: 0.75rem;">Tarih</th>
+                                            <th style="font-size: 0.75rem;">envelope</th>
+                                            <th style="font-size: 0.75rem;">Tutar</th>
+                                            <th style="font-size: 0.75rem;">tax</th>
+                                            <th style="font-size: 0.75rem;">currency</th>
+                                            <th style="font-size: 0.75rem;">Durum</th>
+                                            <th style="font-size: 0.75rem;">description</th>
+                                            <th style="font-size: 0.75rem;">YNT</th>
+                                            <th style="font-size: 0.75rem;">reply_code</th>
+                                            <th style="font-size: 0.75rem;">percentage</th>
+                                            <th style="font-size: 0.75rem;">O/Y</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="modal animate__animated animate__fadeInDownBig modal-transparent" id="preview-sevoucher-modal" tabindex="-1">
+                                <div class="modal-dialog modal-fullscreen">
+                                    <div class="modal-content">
+                                        <div id="preview-body" class="modal-body">
+                                            <a href="javascript:void(0);" class="btn-close text-white" data-bs-dismiss="modal"><i class="fa-solid fa-square-xmark fa-2x"></i></a>
+                                            <h3 class="shadow-lg text-white text-large fw-light mb-3"><b></b></h3>
+                                            <input id="sevoucher-preview-uuid" type="text" hidden>
+                                            <input id="sevoucher-preview-sev-no" type="text" hidden>
+                                            <input id="sevoucher-preview-integrator" type="text" hidden>
+                                            <div class="col-12">
+                                                <div class="d-block d-md-flex justify-content-center">
+                                                    <iframe style="display: none; margin-right: 3rem;" class="shadow-lg p-3 mb-5 bg-white rounded clickable_area" id="sevoucherFrame" height="1080px"></iframe>
+                                                    <div class="col-12 col-md-3">
+                                                        <div class="col-12 mb-4">
+                                                            <div class="card">
+                                                                <div id="detail-buttons" class="card-body clickable_area">
+                                                                    <button id="print-sevoucher-in-preview" class="btn btn-label-linkedin d-grid w-100 mb-2 waves-effect">
+                                                                        <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="fa-solid fa-print fa-xs me-2"></i>Yazdır</span>
+                                                                    </button>
+                                                                    <button id="download-sevoucher-in-preview" class="btn btn-label-linkedin d-grid w-100 mb-2 waves-effect">
+                                                                        <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="fa-solid fa-download fa-xs me-2"></i>İndir</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="print-label" class="col-12 mb-4">
+                                                        </div>
+                                                        <div id="system-status-label" class="col-12 mb-4">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- / Content -->
+                    <%- include('../../partials/footer') %>
+                    <div class="content-backdrop fade"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <div class="drag-target"></div>
+    </div>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>
+Ï

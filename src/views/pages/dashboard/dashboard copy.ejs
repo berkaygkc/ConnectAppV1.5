@@ -1,0 +1,61 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+  <%- include('../../partials/header') %>
+  <title><%= page.display %> - <%= app.name %></title>
+  <%- include('../../partials/theme_css') %>
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+<!-- BEGIN: Content-->
+
+
+<body class="vertical-layout vertical-menu-modern <% if(page.name == 'login') {%>blank-page<% } %> navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="<% if(page.name == 'login') {%>blank-page<% } %> ">
+  
+  <%- include('../../partials/loader') %>
+  <% if(page.name != 'login') { %>
+  <%- include('../../partials/navbar') %>
+  <%- include('../../partials/sidebar') %>
+  <% } %>
+
+
+  <div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+      <div class="content-header row">
+        <div class="content-header-left col-12 mb-2">
+          <div class="row breadcrumbs-top">
+            <div class="col-12">
+              <h2 class="content-header-title float-start mb-0">Kontrol Paneli</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-body">
+      </div>
+    </div>
+  </div>
+  <!-- END: Content-->
+
+  <div class="sidenav-overlay"></div>
+  <div class="drag-target"></div>
+
+  <%- include('../../partials/footer') %>
+
+  <%- include('../../partials/theme_js') %>
+  <script>
+    $('.random-image').each(function() {
+
+      var num = Math.floor((Math.random() * 20) + 1),
+        img = $(this);
+
+      img.attr('src', `/images/banner/banner-${num}.jpg`);
+      img.attr('alt', 'Src: ' + img.attr('src'));
+
+    });
+  </script>
+</body>
+
+</html>

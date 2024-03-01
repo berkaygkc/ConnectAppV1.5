@@ -1,0 +1,221 @@
+<% if(page.menu == 'dashboard') { %>
+<script src="/vendor/libs/apex-charts/apexcharts.js"></script>
+<% } %> <% if(page.uppermenu == 'documents') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/vendor/libs/jquery-sticky/jquery-sticky.js"></script>
+<script src="/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+<script src="/vendor/libs/inputmask/jquery.inputmask.min.js"></script>
+<script src="/vendor/libs/ag-grid/ag-grid-enterprise.min.js"></script>
+<script src="/vendor/libs/ag-grid/locale.tr.js"></script>
+<script src="/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="/vendor/libs/bloodhound/bloodhound.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<% } %> <% if(page.name == 'outgoing-einvoices') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %> <% if(page.name == 'outgoing-earchives') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %> <% if(page.name == 'outgoing-esevouchers') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %> <% if(page.name == 'outgoing-edespatches') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %> <% if(page.name == 'incoming-einvoices') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %> <% if(page.name == 'incoming-edespatches') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %> <% if(page.uppermenu == 'definitions') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/vendor/libs/inputmask/jquery.inputmask.min.js"></script>
+<script src="/vendor/libs/fabric/fabric.js"></script>
+<script src="/vendor/libs/darkroom/darkroom.js"></script>
+<% } %> <% if(page.uppermenu == 'currents') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/ag-grid/ag-grid-enterprise.min.js"></script>
+<script src="/vendor/libs/ag-grid/locale.tr.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %> <% if(page.uppermenu == 'reports') { %>
+<script src="/vendor/libs/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
+<script src="/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-fixedcolumns/datatables.fixedcolumns.js"></script>
+<script src="/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-select/datatables-select.js"></script>
+<script src="/vendor/libs/datatables-select-bs5/select.bootstrap5.js"></script>
+<script src="/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js"></script>
+<script src="/vendor/libs/ag-grid/ag-grid-enterprise.min.js"></script>
+<script src="/vendor/libs/ag-grid/locale.tr.js"></script>
+<script src="/vendor/libs/moment/moment.js"></script>
+<script src="/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+<script src="/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="/vendor/libs/select2/select2.js"></script>
+<script src="/vendor/libs/toastr/toastr2.min.js"></script>
+<script src="/vendor/libs/block-ui/block-ui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% } %>

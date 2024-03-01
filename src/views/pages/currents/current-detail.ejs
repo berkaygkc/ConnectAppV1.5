@@ -1,0 +1,137 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="card">
+                            <div class="card-body demo-vertical-spacing demo-only-element pb-2">
+                                <div class="row col-12 mb-3 justify-content-end">
+                                    <div class="col-12 d-grid">
+                                        <h4 class="fw-bold py-1 mb-0">
+                                            <%- data.current.name.substring(0,30) %>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <div class="nav-align-top mb-3">
+                                <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#current-movements" aria-controls="current-movements" aria-selected="true">
+                                            Hareketler
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#current-details" aria-controls="current-details" aria-selected="false" tabindex="-1">
+                                            Bilgiler
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="current-movements" role="tabpanel">
+                                        <div id="current-movements-list" style="width: 100%; height: 600px;" class="ag-theme-balham"></div>
+                                    </div>
+                                    <div class="tab-pane fade" id="current-details" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-12 mb-2">
+                                                <label class="form-label" for="current-name">Ünvan / Ad Soyad</label>
+                                                <input type="text" class="form-control" id="current-name" value="<%= data.current.name %>">
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <label class="form-label" for="current-tax-number">Vergi / TC Kimlik No</label>
+                                                <input type="text" class="form-control" id="current-tax-number" value="<%= data.current.tax_number %>">
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <label class="form-label" for="current-tax-office">Vergi Dairesi</label>
+                                                <input type="text" class="form-control" id="current-tax-office" value="<%= data.current.tax_office %>">
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-label" for="current-district">İlçe</label>
+                                                <input type="text" class="form-control" id="current-district" value="<%= data.current.district %>">
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-label" for="current-city">İl</label>
+                                                <input type="text" class="form-control" id="current-city" value="<%= data.current.city %>">
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-label" for="current-country">Ülke</label>
+                                                <input type="text" class="form-control" id="current-country" value="<%= data.current.country %>">
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label class="form-label" for="current-address">Adres</label>
+                                                <textarea id="current-address" class="form-control"><%= data.current.address %></textarea>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <label class="form-label" for="current-phone-number">Telefon Numarası</label>
+                                                <input type="text" class="form-control" id="current-phone-number" value="<%= data.current.phone_number %>">
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <label class="form-label" for="current-mail">e-Posta Adresi</label>
+                                                <input type="text" class="form-control" id="current-mail" value="<%= data.current.mail %>">
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <label class="form-label" for="current-postal-code">Posta Kodu</label>
+                                                <input type="text" class="form-control" id="current-postal-code" value="<%= data.current.postal_code %>">
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <label class="form-label" for="current-website">Website</label>
+                                                <input type="text" class="form-control" id="current-website" value="<%= data.current.website %>">
+                                            </div>
+                                            <div class="col-12 mt-3 d-grid">
+                                                <button id="current-update-button" type="button" class="btn btn-primary waves-effect waves-themed">Güncelle</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    <%- include('../../partials/footer') %>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+    </div>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>

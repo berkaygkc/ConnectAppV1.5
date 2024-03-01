@@ -1,0 +1,211 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="col-12">
+                            <div class="row match-height">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header pb-0 d-flex justify-content-between">
+                                            <div class="card-title mb-0">
+                                                <h5 class="mb-0">Fatura Gönderim Durumu</h5>
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="supportTrackerMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="supportTrackerMenu">
+                                                    <a class="dropdown-item" href="/invoices/sended">Listele</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body row">
+                                            <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                <input id="total-percent-invoice" type="number" value="<%= data.invoice.percent %>" hidden>
+                                                <input id="total-success-invoice" type="number" value="<%= data.invoice.successful_invoice %>" hidden>
+                                                <input id="total-error-invoice" type="number" value="<%= data.invoice.errored_invoice %>" hidden>
+                                                <input id="total-mark-invoice" type="number" value="<%= data.invoice.marked_invoice %>" hidden>
+                                                <input id="total-waiting-invoice" type="number" value="<%= data.invoice.waiting_invoice %>" hidden>
+                                                <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
+                                                    <h1 class="mb-0"><%= data.invoice.total_invoice %></h1>
+                                                    <p class="mb-0">Toplam Fatura Sayısı</p>
+                                                </div>
+                                                <ul class="p-0 m-0">
+                                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+                                                        <div class="badge rounded bg-label-success p-1"><i class="ti ti-circle-check ti-sm"></i></div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-nowrap">Başarılı Fatura</h6>
+                                                            <small class="text-muted"><%= data.invoice.successful_invoice %> Adet</small>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
+                                                        <div class="badge rounded bg-label-danger p-1"><i class="ti ti-circle-x ti-sm"></i></div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-nowrap">Hatalı Fatura</h6>
+                                                            <small class="text-muted"><%= data.invoice.errored_invoice %> Adet</small>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex gap-3 align-items-center pb-1">
+                                                        <div class="badge rounded bg-label-primary p-1"><i class="ti ti-alert-circle ti-sm"></i></div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-nowrap">İşaretli Fatura</h6>
+                                                            <small class="text-muted"><%= data.invoice.marked_invoice %> Adet</small>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                                                <div id="invoiceTracker"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header pb-0 d-flex justify-content-between">
+                                            <div class="card-title mb-0">
+                                                <h5 class="mb-0">İrsaliye Gönderim Durumu</h5>
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="supportTrackerMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="supportTrackerMenu">
+                                                    <a class="dropdown-item" href="javascript:void(0);">Listele</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body row">
+                                            <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                <input id="total-percent-despatch" type="number" value="<%= data.despatch.percent %>" hidden>
+                                                <input id="total-success-despatch" type="number" value="<%= data.despatch.successful_despatch %>" hidden>
+                                                <input id="total-error-despatch" type="number" value="<%= data.despatch.errored_despatch %>" hidden>
+                                                <input id="total-mark-despatch" type="number" value="<%= data.despatch.marked_despatch %>" hidden>
+                                                <input id="total-waiting-despatch" type="number" value="<%= data.despatch.waiting_despatch %>" hidden>
+                                                <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
+                                                    <h1 class="mb-0"><%= data.despatch.total_despatch %></h1>
+                                                    <p class="mb-0">Toplam İrsaliye Sayısı</p>
+                                                </div>
+                                                <ul class="p-0 m-0">
+                                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+                                                        <div class="badge rounded bg-label-success p-1"><i class="ti ti-circle-check ti-sm"></i></div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-nowrap">Başarılı İrsaliye</h6>
+                                                            <small class="text-muted"><%= data.despatch.successful_despatch %> Adet</small>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
+                                                        <div class="badge rounded bg-label-danger p-1"><i class="ti ti-circle-x ti-sm"></i></div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-nowrap">Hatalı İrsaliye</h6>
+                                                            <small class="text-muted"><%= data.despatch.errored_despatch %> Adet</small>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex gap-3 align-items-center pb-1">
+                                                        <div class="badge rounded bg-label-primary p-1"><i class="ti ti-alert-circle ti-sm"></i></div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-nowrap">İşaretli İrsaliye</h6>
+                                                            <small class="text-muted"><%= data.despatch.marked_despatch %> Adet</small>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                                                <div id="despatchTracker"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row match-height">
+                                <div class="col-12 col-md-8 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <h5 class="card-title mb-0">Kontör Durumları</h5>
+                                        </div>
+                                        <div class="card-body pt-2">
+                                            <div class="row gy-3">
+                                                <div class="col-sm-4 col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="badge rounded-pill bg-label-info me-3 p-2"><i class="fa-solid fa-cart-shopping fa-sm"></i></div>
+                                                        <div class="card-info">
+                                                            <h5 class="mb-0"><%- Number(data.balance.total_purchased) %> Adet</h5>
+                                                            <small>Satın Alınan</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="badge rounded-pill bg-label-primary me-3 p-2"><i class="fa-solid fa-gauge fa-sm"></i></div>
+                                                        <div class="card-info">
+                                                            <h5 class="mb-0"><%= Number(data.balance.total_used) %> Adet</h5>
+                                                            <small>Kullanılan</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-12">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="badge rounded-pill bg-label-success me-3 p-2"><i class="fa-solid fa-scale-balanced fa-sm"></i></div>
+                                                        <div class="card-info">
+                                                            <h5 class="mb-0"><%= data.balance.balance %> Adet</h5>
+                                                            <small>Kalan</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    <%- include('../../partials/footer') %>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+    </div>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>

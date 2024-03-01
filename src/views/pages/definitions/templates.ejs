@@ -1,0 +1,394 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <div class="layout-page">
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="nav-align-top nav-tabs-shadow mb-4">
+                            <ul class="nav nav-tabs nav-fill" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#einvoice-templates" aria-controls="einvoice-templates" aria-selected="true">
+                                        e-Fatura Şablonları
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#earchive-templates" aria-controls="earchive-templates" aria-selected="false" tabindex="-1">
+                                        e-Arşiv Fatura Şablonları
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#edespatch-templates" aria-controls="edespatch-templates" aria-selected="false" tabindex="-1">
+                                        e-İrsaliye Şablonları
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#esevoucher-templates" aria-controls="esevoucher-templates" aria-selected="false" tabindex="-1">
+                                        e-SMM Şablonları
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="einvoice-templates" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-Fatura Şablonu
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#einvoice-fromfile"> Dosyadan Ekle</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#einvoice-createnew"> Yeni Oluştur</a>
+                                                </li>
+                                            </ul>
+                                            <div class="modal modal-top fade" id="einvoice-fromfile" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-Fatura Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="einvoice-template-name" class="form-label">Şablon Adı</label>
+                                                                    <input type="text" id="einvoice-template-name" class="form-control" placeholder="Şablon Adı">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col mb-4">
+                                                                    <label for="einvoice-template-file" class="form-label">XSLT Dosyası</label>
+                                                                    <input class="form-control" type="file" id="einvoice-template-file" accept=".xslt">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="einvoice-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="einvoice-save-from-file" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal modal-top fade" id="einvoice-createnew" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-Fatura Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img id="test-canvas" src="/img/illustrations/girl-sitting-with-laptop.png" alt="">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="einvoice-templates-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Şablon Adı</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="earchive-templates" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-Arşiv Şablonu
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#earchive-fromfile"> Dosyadan Ekle</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#earchive-createnew"> Yeni Oluştur</a>
+                                                </li>
+                                            </ul>
+                                            <div class="modal modal-top fade" id="earchive-fromfile" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-Arşiv Fatura Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="earchive-template-name" class="form-label">Şablon Adı</label>
+                                                                    <input type="text" id="earchive-template-name" class="form-control" placeholder="Şablon Adı">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col mb-4">
+                                                                    <label for="earchive-template-file" class="form-label">XSLT Dosyası</label>
+                                                                    <input class="form-control" type="file" id="earchive-template-file" accept=".xslt">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="earchive-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="earchive-save-from-file" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal modal-top fade" id="earchive-createnew" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-Arşiv Fatura Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img id="test-canvas" src="/img/illustrations/girl-sitting-with-laptop.png" alt="">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="earchive-templates-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Şablon Adı</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="edespatch-templates" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-İrsaliye Şablonu
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edespatch-fromfile"> Dosyadan Ekle</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edespatch-createnew"> Yeni Oluştur</a>
+                                                </li>
+                                            </ul>
+                                            <div class="modal modal-top fade" id="edespatch-fromfile" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-İrsaliye Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="edespatch-template-name" class="form-label">Şablon Adı</label>
+                                                                    <input type="text" id="edespatch-template-name" class="form-control" placeholder="Şablon Adı">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col mb-4">
+                                                                    <label for="edespatch-template-file" class="form-label">XSLT Dosyası</label>
+                                                                    <input class="form-control" type="file" id="edespatch-template-file" accept=".xslt">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="edespatch-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="edespatch-save-from-file" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal modal-top fade" id="edespatch-createnew" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-İrsaliye Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img id="test-canvas" src="/img/illustrations/girl-sitting-with-laptop.png" alt="">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="edespatch-templates-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Şablon Adı</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="esevoucher-templates" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-SMM Şablonu
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#esevoucher-fromfile"> Dosyadan Ekle</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#esevoucher-createnew"> Yeni Oluştur</a>
+                                                </li>
+                                            </ul>
+                                            <div class="modal modal-top fade" id="esevoucher-fromfile" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-SMM Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="esevoucher-template-name" class="form-label">Şablon Adı</label>
+                                                                    <input type="text" id="esevoucher-template-name" class="form-control" placeholder="Şablon Adı">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col mb-4">
+                                                                    <label for="esevoucher-template-file" class="form-label">XSLT Dosyası</label>
+                                                                    <input class="form-control" type="file" id="esevoucher-template-file" accept=".xslt">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="esevoucher-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="esevoucher-save-from-file" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal modal-top fade" id="esevoucher-createnew" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-SMM Şablonu</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img id="test-canvas" src="/img/illustrations/girl-sitting-with-laptop.png" alt="">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="esevoucher-templates-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Şablon Adı</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <%- include('../../partials/footer') %>
+                    <div class="content-backdrop fade"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <div class="drag-target"></div>
+    </div>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>
+Ï

@@ -1,0 +1,152 @@
+<% if(page.menu == 'dashboard') { %>
+<script src="/js/views/dashboard/charts.js"></script>
+<% } %> <% if(page.name == 'invoices-waiting') { %>
+<script src="/js/views/invoices/waiting/waiting.js"></script>
+<% } %> <% if(page.name == 'despatches-waiting') { %>
+<script src="/js/views/despatches/waiting/waiting.js"></script>
+<% } %> <% if(page.name == 'sevouchers-waiting') { %>
+<script src="/js/views/sevouchers/waiting/waiting.js"></script>
+<% } %> <% if(page.name == 'invoices-sended') { %>
+<script src="/js/views/invoices/sended/sended.js"></script>
+<% } %> <% if(page.name == 'despatches-sended') { %>
+<script src="/js/views/despatches/sended/sended.js"></script>
+<% } %> <% if(page.name == 'sevouchers-sended') { %>
+<script src="/js/views/sevouchers/sended/sended.js"></script>
+<% } %> <% if(page.name == 'outgoing-einvoices') { %>
+<script src="/js/views/outgoing/einvoices/definitions.js"></script>
+<script src="/js/views/outgoing/einvoices/einvoices.js"></script>
+<% } %> <% if(page.name == 'outgoing-edespatches') { %>
+<script src="/js/views/outgoing/edespatches/definitions.js"></script>
+<script src="/js/views/outgoing/edespatches/edespatches.js"></script>
+<% } %> <% if(page.name == 'outgoing-earchives') { %>
+<script src="/js/views/outgoing/earchives/definitions.js"></script>
+<script src="/js/views/outgoing/earchives/earchives.js"></script>
+<% } %> <% if(page.name == 'outgoing-esevouchers') { %>
+<script src="/js/views/outgoing/esevouchers/definitions.js"></script>
+<script src="/js/views/outgoing/esevouchers/esevouchers.js"></script>
+<% } %> <% if(page.name == 'incoming-einvoices') { %>
+<script src="/js/views/incoming/einvoices/definitions.js"></script>
+<script src="/js/views/incoming/einvoices/einvoices.js"></script>
+<% } %> <% if(page.name == 'incoming-edespatches') { %>
+<script src="/js/views/incoming/edespatches/definitions.js"></script>
+<script src="/js/views/incoming/edespatches/edespatches.js"></script>
+<% } %> <% if(page.menu == 'definitions-templates') { %>
+<script src="/js/views/definitions/templates/einvoice.js"></script>
+<script src="/js/views/definitions/templates/earchive.js"></script>
+<script src="/js/views/definitions/templates/edespatch.js"></script>
+<script src="/js/views/definitions/templates/esevoucher.js"></script>
+<% } %> <% if(page.menu == 'definitions-series') { %>
+<script src="/js/views/definitions/series/einvoice.js"></script>
+<script src="/js/views/definitions/series/earchive.js"></script>
+<script src="/js/views/definitions/series/edespatch.js"></script>
+<script src="/js/views/definitions/series/esevoucher.js"></script>
+<% } %> <% if(page.menu == 'definitions-despatches') { %>
+<script src="/js/views/definitions/despatches/drivers.js"></script>
+<script src="/js/views/definitions/despatches/carrier.js"></script>
+<% } %>
+<% if(page.name == 'create-invoice') { %>
+<script src="/js/views/create/agGridDefinitions/deleteCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/discountAmountCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/itemSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/kdvCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericMultiplication.js"></script>
+<script src="/js/views/create/agGridDefinitions/unitSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingTaxCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/dateSelectorCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/detailCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/deleteDetailCellRenderer.js"></script>
+<script src="/js/views/create/invoice/animate.js"></script>
+<script src="/js/views/create/invoice/sticky-form.js"></script>
+<script src="/js/views/create/invoice/lines.js"></script>
+<script src="/js/views/create/invoice/definitions.js"></script>
+<script src="/js/views/create/invoice/despatches.js"></script>
+<script src="/js/views/create/invoice/notes.js"></script>
+<script src="/js/views/create/invoice/settings.js"></script>
+<script src="/js/views/create/invoice/validate.js"></script>
+<script src="/js/views/create/invoice/edit.js"></script>
+<script src="/js/views/create/invoice/create.js"></script>
+<% } %>
+<% if(page.name == 'create-export') { %>
+<script src="/js/views/create/agGridDefinitions/deleteCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/discountAmountCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/itemSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/kdvCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericMultiplication.js"></script>
+<script src="/js/views/create/agGridDefinitions/unitSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingTaxCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/dateSelectorCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/detailCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/exportDetailCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/deleteDetailCellRenderer.js"></script>
+<script src="/js/views/create/export/animate.js"></script>
+<script src="/js/views/create/export/sticky-form.js"></script>
+<script src="/js/views/create/export/lines.js"></script>
+<script src="/js/views/create/export/definitions.js"></script>
+<script src="/js/views/create/export/despatches.js"></script>
+<script src="/js/views/create/export/notes.js"></script>
+<script src="/js/views/create/export/settings.js"></script>
+<script src="/js/views/create/export/validate.js"></script>
+<script src="/js/views/create/export/edit.js"></script>
+<script src="/js/views/create/export/exportDetail.js"></script>
+<script src="/js/views/create/export/create.js"></script>
+<% } %>
+<% if(page.name == 'create-sevoucher') { %>
+<script src="/js/views/create/agGridDefinitions/deleteCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/discountAmountCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/itemSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/kdvCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericMultiplication.js"></script>
+<script src="/js/views/create/agGridDefinitions/unitSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingTaxCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/dateSelectorCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/detailCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/deleteDetailCellRenderer.js"></script>
+<script src="/js/views/create/sevoucher/animate.js"></script>
+<script src="/js/views/create/sevoucher/sticky-form.js"></script>
+<script src="/js/views/create/sevoucher/lines.js"></script>
+<script src="/js/views/create/sevoucher/definitions.js"></script>
+<script src="/js/views/create/sevoucher/notes.js"></script>
+<script src="/js/views/create/sevoucher/settings.js"></script>
+<script src="/js/views/create/sevoucher/validate.js"></script>
+<script src="/js/views/create/sevoucher/edit.js"></script>
+<script src="/js/views/create/sevoucher/create.js"></script>
+<% } %>
+<% if(page.name == 'create-despatch') { %>
+<script src="/js/views/create/agGridDefinitions/deleteCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/discountAmountCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/itemSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/kdvCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingCalculate.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/numericMultiplication.js"></script>
+<script src="/js/views/create/agGridDefinitions/unitSelectCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/withholdingTaxCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/dateSelectorCellEditor.js"></script>
+<script src="/js/views/create/agGridDefinitions/detailCellRenderer.js"></script>
+<script src="/js/views/create/agGridDefinitions/deleteDetailCellRenderer.js"></script>
+<script src="/js/views/create/despatch/animate.js"></script>
+<script src="/js/views/create/despatch/sticky-form.js"></script>
+<script src="/js/views/create/despatch/lines.js"></script>
+<script src="/js/views/create/despatch/definitions.js"></script>
+<script src="/js/views/create/despatch/otherCurrents.js"></script>
+<script src="/js/views/create/despatch/notes.js"></script>
+<script src="/js/views/create/despatch/settings.js"></script>
+<script src="/js/views/create/despatch/validate.js"></script>
+<script src="/js/views/create/despatch/edit.js"></script>
+<script src="/js/views/create/despatch/create.js"></script>
+<% } %><% if(page.name == 'currents') { %>
+<script src="/js/views/currents/currents.js"></script>
+<% } %><% if(page.name == 'current-detail') { %>
+<script src="/js/views/currents/grandTotalRenderer.js"></script>
+<script src="/js/views/currents/detail.js"></script>
+<script src="/js/views/currents/detail-table.js"></script>
+<% } %><% if(page.name == 'vergi-raporu') { %>
+<script src="/js/views/reports/grandTotalRenderer.js"></script>
+<script src="/js/views/reports/vergi-raporu.js"></script>
+<% } %>

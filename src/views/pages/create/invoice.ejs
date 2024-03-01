@@ -1,0 +1,1190 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head><%- include('../../partials/header') %> <title><%= page.display %> - <%= app.name %> </title><%- include('../../partials/theme_css') %> <style>
+        .ag-header-cell.checkbox {
+            padding-left: 40px;
+        }
+
+        .ag-theme-balham {
+            /* disable all borders */
+            --ag-borders: none;
+            /* then add back a border between rows */
+            --ag-borders-row: dashed 1px;
+            --ag-row-border-color: rgb(150, 150, 200);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu --><% if(page.name !='login' && page.name !='404' ) { %><%- include('../../partials/sidebar') %><% } %>
+            <!-- / Menu -->
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar --><% if(page.name !='login' && page.name !='404' ) { %><%- include('../../partials/navbar') %><% } %>
+                <!-- / Navbar -->
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header sticky-element bg-label-primary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
+                                        <h4 class="fw-bold py-1 mb-0">
+                                            <span class="text-muted fw-light">Belge Oluştur /</span> Fatura Oluştur
+                                        </h4>
+                                        <div id="action-btns" class="action-btns" style="display: none;">
+                                            <div class="btn-group">
+                                                <button id="settings-button" type="button" class="btn btn-facebook btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                                    <i class="fa-solid fa-gear"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end w-px-300">
+                                                    <div class="px-4 pb-1">
+                                                        <figure class="mt-2">
+                                                            <blockquote class="blockquote">
+                                                                <p class="mb-0">Görünüm Ayarları</p>
+                                                            </blockquote>
+                                                            <figcaption class="blockquote-footer"> Aşağıdaki ayarlar ile hangi alanların gözükmesini istediğinizi güncelleyebilirsiniz. </figcaption>
+                                                        </figure>
+                                                        <!-- <div class="mb-2"><label class="switch switch-square"><input id="sender-checkbox" type="checkbox" class="switch-input"><span class="switch-toggle-slider"><span class="switch-on"><i class="ti ti-check"></i></span><span class="switch-off"><i class="ti ti-x"></i></span></span><span class="switch-label">Gönderici Bilgileri</span></label></div> -->
+                                                        <div class="mb-2">
+                                                            <label class="switch switch-square">
+                                                                <input id="order-despatches-checkbox" type="checkbox" class="switch-input">
+                                                                <span class="switch-toggle-slider">
+                                                                    <span class="switch-on">
+                                                                        <i class="ti ti-check"></i>
+                                                                    </span>
+                                                                    <span class="switch-off">
+                                                                        <i class="ti ti-x"></i>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="switch-label">Sipariş & İrsaliye Bilgileri</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="switch switch-square">
+                                                                <input id="buyer-customer-checkbox" type="checkbox" class="switch-input">
+                                                                <span class="switch-toggle-slider">
+                                                                    <span class="switch-on">
+                                                                        <i class="ti ti-check"></i>
+                                                                    </span>
+                                                                    <span class="switch-off">
+                                                                        <i class="ti ti-x"></i>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="switch-label">Aracı Kurum Bilgileri</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="switch switch-square">
+                                                                <input id="payment-means-checkbox" type="checkbox" class="switch-input">
+                                                                <span class="switch-toggle-slider">
+                                                                    <span class="switch-on">
+                                                                        <i class="ti ti-check"></i>
+                                                                    </span>
+                                                                    <span class="switch-off">
+                                                                        <i class="ti ti-x"></i>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="switch-label">Ödeme Detayları</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button id="download-button" type="button" class="btn btn-slack btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                                    <i id="download-button-icon" class="fa-solid fa-download"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a id="xml-download" class="dropdown-item" href="javascript:void(0)">XML Olarak İndir</a>
+                                                    <a id="json-download" class="dropdown-item" href="javascript:void(0)">JSON Olarak İndir</a>
+                                                </div>
+                                            </div>
+                                            <button id="preview-created-invoice" type="button" class="btn btn-linkedin btn-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Faturayı önizle">
+                                                <i id="preview-created-invoice-icon" class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                            <button id="save-created-invoice" type="button" class="btn btn-warning btn-icon me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Taslaklara Kaydet">
+                                                <i class="fa-solid fa-floppy-disk fa-lg"></i>
+                                            </button>
+                                            <button id="send-created-invoice" type="button" class="btn btn-primary me-2">
+                                                <i class="fa-solid fa-paper-plane fa-lg me-2"></i> Gönder </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="customer-part" class="mt-2">
+                                                    <div id="customer-collapse-header" class="card" style="display: none;">
+                                                        <div class="customer-collapse-button d-flex row" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#customer-collapse" aria-expanded="false" aria-controls="customer-collapse">
+                                                            <div class="card-body d-flex justify-content-between align-items-center">
+                                                                <div class="mx-4">
+                                                                    <div class="card-title mb-0">
+                                                                        <h5 id="customer-name-label" class="mb-0 me-2"></h5>
+                                                                        <small id="customer-tax-label"></small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-icon mx-4">
+                                                                    <span id="customer-collapse-header-title" class="badge rounded-pill p-2"> Alıcı </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="collapse show" id="customer-collapse">
+                                                        <div class="d-grid rounded mt-3">
+                                                            <div class="card mb-4">
+                                                                <div class="card-body">
+                                                                    <div class="card-title header-elements">
+                                                                        <h5 class="m-0 me-2"> Alıcı Bilgileri </h5>
+                                                                        <div class="card-header-elements ms-auto">
+                                                                            <span id="customer-liability-label" class="badge me-2" style="display: none;"></span>
+                                                                            <span id="customer-einvoice-etiket-counter" class="badge badge-center bg-linkedin me-1" style="display: none;">0</span>
+                                                                            <div class="btn-group">
+                                                                                <select id="customer-etiket-list" class="form-select form-select-sm w-auto"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-name">Ünvan / Adı Soyadı</label>
+                                                                                            <!-- <div id="customer-name-input" class="input-group input-group-merge">
+                                                                                                <span class="input-group-text">
+                                                                                                    <i class="ti ti-point"></i>
+                                                                                                </span>
+                                                                                            </div> -->
+                                                                                            <input id="customer-name" type="text" class="form-control bootstrap-maxlength-input" maxlength="250">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-tax">Vergi/TC Kimlik Numarası</label>
+                                                                                            <input id="customer-tax" type="text" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-tax-office">Vergi Dairesi</label>
+                                                                                            <input id="customer-tax-office" type="text" class="form-control bootstrap-maxlength-input" maxlength="75">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-address">Adres</label>
+                                                                                            <input id="customer-address" type="text" class="form-control bootstrap-maxlength-input" maxlength="250">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-1">
+                                                                                <div class="divider divider-vertical">
+                                                                                    <div class="divider-text"> * </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <div class="row">
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-district">İlçe</label>
+                                                                                            <input id="customer-district" type="text" class="form-control bootstrap-maxlength-input" maxlength="50" autocomplete="off">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-city">İl</label>
+                                                                                            <input id="customer-city" type="text" class="form-control bootstrap-maxlength-input" maxlength="50" autocomplete="off">
+                                                                                            <input id="customer-city-code" type="text" hidden>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-country">Ülke</label>
+                                                                                            <input id="customer-country" type="text" class="form-control bootstrap-maxlength-input" maxlength="100" autocomplete="new-password">
+                                                                                            <input id="customer-country-code" type="text" hidden>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-phone">Telefon Numarası</label>
+                                                                                            <input id="customer-phone" type="text" class="form-control bootstrap-maxlength-input" maxlength="15">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-mail">e-Posta Adresi</label>
+                                                                                            <input id="customer-mail" type="text" class="form-control bootstrap-maxlength-input" maxlength="100">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-postal">Posta Kodu</label>
+                                                                                            <input id="customer-postal" type="text" class="form-control bootstrap-maxlength-input" maxlength="5">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="customer-web">Website</label>
+                                                                                            <input id="customer-web" type="text" class="form-control bootstrap-maxlength-input" maxlength="100">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="invoice-part" class="mt-2" style="display: none;">
+                                                    <div class="card bg-label-slack">
+                                                        <div class="d-flex row" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#invoice-collapse" aria-expanded="false" aria-controls="invoice-collapse">
+                                                            <div class="card-body d-flex justify-content-between align-items-center">
+                                                                <div class="mx-4">
+                                                                    <!-- <h5 class="mb-2">Alıcı Bilgileri</h5> -->
+                                                                    <div class="card-title mb-0">
+                                                                        <h5 class="mb-0 me-2">
+                                                                            <b>
+                                                                                <b id="invoice-profile-label"></b>
+                                                                                <b id="invoice-type-label">Satış</b> Faturası </b>
+                                                                        </h5>
+                                                                        <small id="invoice-date-label"></small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-icon mx-4">
+                                                                    <span class="badge bg-slack rounded-pill p-2"> Üst Bilgi </span>
+                                                                    <!-- <div class="avatar"><span class="avatar-initial rounded-circle bg-linkedin">hn</span></div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="collapse show" id="invoice-collapse">
+                                                        <div class="d-grid rounded mt-3">
+                                                            <div class="card mb-4">
+                                                                <div class="card-body">
+                                                                    <div class="card-title header-elements">
+                                                                        <h5 class="m-0 me-2"> Üst Bilgi</h5>
+                                                                        <!-- <div class="card-header-elements"><span class="badge bg-label-linkedin">e-Fatura Mükellefi</span></div> -->
+                                                                        <div class="card-header-elements ms-auto"></div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="row">
+                                                                            <div class="col-5">
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-profile">Fatura Senaryosu</label>
+                                                                                            <select id="invoice-profile" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-type">Fatura Tipi</label>
+                                                                                            <select id="invoice-type" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-date">Fatura Tarihi</label>
+                                                                                            <div class="input-group input-group-merge">
+                                                                                                <span class="input-group-text">
+                                                                                                    <i class="ti ti-calendar"></i>
+                                                                                                </span>
+                                                                                                <input id="invoice-date" type="text" class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-1">
+                                                                                <div class="divider divider-vertical">
+                                                                                    <div class="divider-text"> * </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="row">
+                                                                                    <input type="hidden" id="inv-no-status" value="0">
+                                                                                    <div id="oto-serie-div" class="row">
+                                                                                        <div class="col-8">
+                                                                                            <div class="mb-2">
+                                                                                                <label class="form-label" for="invoice-serie">Fatura Serisi</label>
+                                                                                                <select id="einvoice-serie" class="form-select form-select-sm w-auto"></select>
+                                                                                                <select id="earchive-serie" class="form-select form-select-sm w-auto"></select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-4">
+                                                                                            <div class="mb-2 mt-4 d-grid">
+                                                                                                <button id="make-manuel-serie" class="btn btn-outline-primary">Manuel No</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div id="manuel-serie-div" class="row" style="display: none;">
+                                                                                        <div class="col-4">
+                                                                                            <div class="mb-2 mt-4 d-grid">
+                                                                                                <button id="make-auto-serie" class="btn btn-outline-primary">Otomatik No</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-8">
+                                                                                            <div class="mb-2">
+                                                                                                <label class="form-label" for="invoice-serie">Manuel Fatura Numarası</label>
+                                                                                                <input id="manuel-invoice-number" type="text" class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="basic-default-company">Fatura Şablonu</label>
+                                                                                            <select id="einvoice-template" class="form-select form-select-sm w-auto"></select>
+                                                                                            <select id="earchive-template" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div id="currency-code-div" class="col-12">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="currency-codes">Para Birimi</label>
+                                                                                            <select id="currency-codes" class="form-select form-select-sm w-auto">
+                                                                                                <option value="TRY" selected> TRY - Türk Lirası </option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div id="exchange-rate-div" class="col-6" style="display: none;">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="exchange-rate">Döviz Kuru</label>
+                                                                                            <div class="input-group input-group-merge">
+                                                                                                <span id="currecy-code-text" class="input-group-text">
+                                                                                                </span>
+                                                                                                <input id="exchange-rate" type="text" class="form-control">
+                                                                                                <span class="input-group-text">
+                                                                                                    ₺
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="earchive-part" class="col-12" style="display: none;">
+                                                                                <div class="divider divider-warning">
+                                                                                    <div class="divider-text"> e-Arşiv Detayları </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-kdv-exemption">e-Arşiv Gönderim Tipi</label>
+                                                                                            <select id="earchive-send-type" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-kdv-exemption">e-Arşiv Satış Kanalı</label>
+                                                                                            <select id="earchive-sell-type" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="exemptions-part" class="col-12" style="display: none;">
+                                                                                <div class="divider divider-warning">
+                                                                                    <div class="divider-text"> İstisna Detayları </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-kdv-exemption">KDV İstisna Muafiyet Sebebi</label>
+                                                                                            <select id="invoice-kdv-exemption" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="ozelmatrah-exemptions-part" class="col-12" style="display: none;">
+                                                                                <div class="divider divider-warning">
+                                                                                    <div class="divider-text"> Özel Matrah Detayları </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-3">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-ozel-matrah-exemption">Özel Matrah Sebebi</label>
+                                                                                            <select id="invoice-ozel-matrah-exemption" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="sgk-part" class="col-12" style="display: none;">
+                                                                                <div class="divider divider-warning">
+                                                                                    <div class="divider-text"> SGK Detayları </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-sgk-type">SGK Fatura Tipi</label>
+                                                                                            <select id="invoice-sgk-type" class="form-select form-select-sm w-auto"></select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-sgk-comp-code">SGK Şirket Kodu</label>
+                                                                                            <input type="text" id="invoice-sgk-comp-code" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-comp-name">SGK Şirket Adı</label>
+                                                                                            <input type="text" id="invoice-sgk-comp-name" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-sgk-doc-no">Döküman No</label>
+                                                                                            <input type="text" id="invoice-sgk-doc-no" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-sgk-start-date">Dönem Başlangıç Tarihi</label>
+                                                                                            <div class="input-group input-group-merge">
+                                                                                                <span class="input-group-text">
+                                                                                                    <i class="ti ti-calendar"></i>
+                                                                                                </span>
+                                                                                                <input id="invoice-sgk-start-date" type="text" class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="mb-2">
+                                                                                            <label class="form-label" for="invoice-sgk-end-date">Dönem Bitiş Tarihi</label>
+                                                                                            <div class="input-group input-group-merge">
+                                                                                                <span class="input-group-text">
+                                                                                                    <i class="ti ti-calendar"></i>
+                                                                                                </span>
+                                                                                                <input id="invoice-sgk-end-date" type="text" class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="buyer-customer-part-vs" style="display: none;">
+                                                    <div id="buyer-customer-part" class="mt-2" style="display: none;">
+                                                        <div id="buyer-customer-collapse-header" class="card bg-label-vimeo">
+                                                            <div class="buyer-customer-collapse-button d-flex row collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#buyer-customer-collapse" aria-expanded="false" aria-controls="buyer-customer-collapse">
+                                                                <div class="card-body d-flex justify-content-between align-items-center">
+                                                                    <div class="mx-4">
+                                                                        <div class="card-title mb-0">
+                                                                            <h5 class="mb-0"> Aracı Kurum</h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-icon mx-4">
+                                                                        <span id="buyer-customer-collapse-header-title" class="badge rounded-pill p-2 bg-vimeo"> Aracı </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="collapse show" id="buyer-customer-collapse">
+                                                            <div class="d-grid rounded mt-3">
+                                                                <div class="card mb-4">
+                                                                    <div class="card-body">
+                                                                        <div class="card-title header-elements">
+                                                                            <h5 class="m-0 me-2">Alıcı Aracı Bilgileri</h5>
+                                                                            <div class="card-header-elements ms-auto">
+                                                                                <button id="buyer-customer-copy-from-customer" type="button" class="btn btn-sm btn-success waves-effect waves-light">
+                                                                                    <span class="ti ti-copy me-1"></span> Alıcı Bilgilerini Kopyala </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="mb-2">
+                                                                                    <label class="form-label" for="buyer-customer-name">Ünvan / Adı Soyadı</label>
+                                                                                    <div id="buyer-customer-name-input" class="input-group input-group-merge">
+                                                                                        <span class="input-group-text">
+                                                                                            <i class="ti ti-point"></i>
+                                                                                        </span>
+                                                                                        <input id="buyer-customer-name" type="text" class="form-control bootstrap-maxlength-input" maxlength="250" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="mb-2">
+                                                                                    <label class="form-label" for="buyer-customer-tax">Vergi/TC Kimlik Numarası</label>
+                                                                                    <div id="buyer-customer-tax-input" class="input-group input-group-merge">
+                                                                                        <span class="input-group-text">
+                                                                                            <i class="ti ti-point"></i>
+                                                                                        </span>
+                                                                                        <input id="buyer-customer-tax" type="text" class="form-control" inputmode="text" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="accordion mt-3" id="buyer-customer-add-accordion">
+                                                                            <div class="card accordion-item">
+                                                                                <h2 class="accordion-header" id="buyer-customer-add-button">
+                                                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#buyer-customer-add" aria-expanded="false" aria-controls="buyer-customer-add"> Ek Bilgiler </button>
+                                                                                </h2>
+                                                                                <div id="buyer-customer-add" class="accordion-collapse collapse" data-bs-parent="#buyer-customer-add-accordion">
+                                                                                    <div class="accordion-body">
+                                                                                        <div class="col-12">
+                                                                                            <div class="row">
+                                                                                                <div class="col-6">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-12">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-address">Adres</label>
+                                                                                                                <div class="input-group input-group-merge">
+                                                                                                                    <span class="input-group-text">
+                                                                                                                        <i class="ti ti-point"></i>
+                                                                                                                    </span>
+                                                                                                                    <input id="buyer-customer-address" type="text" class="form-control bootstrap-maxlength-input" maxlength="250" />
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-6">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-tax-office">Vergi Dairesi</label>
+                                                                                                                <input id="buyer-customer-tax-office" type="text" class="form-control bootstrap-maxlength-input" maxlength="75" />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-6">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-phone">Telefon Numarası</label>
+                                                                                                                <input id="buyer-customer-phone" type="text" class="form-control bootstrap-maxlength-input" maxlength="15" />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-6">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-district">İlçe</label>
+                                                                                                                <input id="buyer-customer-district" type="text" class="form-control bootstrap-maxlength-input" maxlength="50" />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-city">İl</label>
+                                                                                                                <input id="buyer-customer-city" type="text" class="form-control bootstrap-maxlength-input" maxlength="50" />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-country">Ülke</label>
+                                                                                                                <input id="buyer-customer-country" type="text" class="form-control bootstrap-maxlength-input" maxlength="100" />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-6">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-mail">e-Posta Adresi</label>
+                                                                                                                <input id="buyer-customer-mail" type="text" class="form-control bootstrap-maxlength-input" maxlength="100" />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-6">
+                                                                                                            <div class="mb-2">
+                                                                                                                <label class="form-label" for="buyer-customer-postal">Posta Kodu</label>
+                                                                                                                <input id="buyer-customer-postal" type="text" class="form-control bootstrap-maxlength-input" maxlength="5" />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="payment-means-part-vs" style="display: none;">
+                                                    <div id="payment-means-part" class="mt-2" style="display: none;">
+                                                        <div id="payment-means-collapse-header" class="card bg-label-warning">
+                                                            <div class="payment-means-collapse-button d-flex row collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#payment-means-collapse" aria-expanded="false" aria-controls="payment-means-collapse">
+                                                                <div class="card-body d-flex justify-content-between align-items-center">
+                                                                    <div class="mx-4">
+                                                                        <div class="card-title mb-0">
+                                                                            <h5 class="mb-0"> Ödeme Detayları</h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-icon mx-4">
+                                                                        <span id="payment-means-collapse-header-title" class="badge rounded-pill p-2 bg-warning"> Ödeme
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="collapse show" id="payment-means-collapse">
+                                                            <div class="d-grid rounded mt-3">
+                                                                <div class="card mb-4">
+                                                                    <div class="card-body">
+                                                                        <div class="card-title header-elements">
+                                                                            <h5 class="m-0 me-2">Ödeme Şekli Bilgileri</h5>
+                                                                            <div class="card-header-elements ms-auto">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="mb-2">
+                                                                                    <label class="form-label" for="payment-means-code">Ödeme Şekli Kodu</label>
+                                                                                    <select id="payment-means-code" class="form-select form-select-sm w-auto"></select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="mb-2">
+                                                                                    <label class="form-label" for="payment-means-channel">Ödeme Kanal Kodu</label>
+                                                                                    <select id="payment-means-channel" class="form-select form-select-sm w-auto"></select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-3">
+                                                                                <div class="mb-2">
+                                                                                    <label class="form-label" for="payment-means-date">Son Ödeme Tarihi</label>
+                                                                                    <div class="input-group input-group-merge">
+                                                                                        <span class="input-group-text">
+                                                                                            <i class="ti ti-calendar"></i>
+                                                                                        </span>
+                                                                                        <input id="payment-means-date" type="text" class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-9">
+                                                                                <div class="mb-2">
+                                                                                    <label class="form-label" for="payment-means-description">Ödeme Açıklaması</label>
+                                                                                    <div class="input-group input-group-merge">
+                                                                                        <span class="input-group-text">
+                                                                                            <i class="ti ti-file-description"></i>
+                                                                                        </span>
+                                                                                        <input id="payment-means-description" type="text" class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-12">
+                                                                                <div class="mb-2">
+                                                                                    <label class="form-label" for="payment-means-iban">Hesap No / IBAN</label>
+                                                                                    <div class="input-group input-group-merge">
+                                                                                        <span class="input-group-text">
+                                                                                            <i class="ti ti-hash"></i>
+                                                                                        </span>
+                                                                                        <input id="payment-means-iban" type="text" class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="order-despatches-part" class="mt-2" style="display: none;">
+                                                    <div class="card bg-label-dribbble">
+                                                        <div class="d-flex row" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#order-despatches-collapse" aria-expanded="false" aria-controls="order-despatches-collapse">
+                                                            <div class="card-body d-flex justify-content-between align-items-center">
+                                                                <div class="mx-4">
+                                                                    <div class="card-title mb-0">
+                                                                        <h5 class="mb-0"> Sipariş & İrsaliye Bilgileri</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-icon mx-4">
+                                                                    <span class="badge bg-dribbble rounded-pill p-2"> Sipariş & İrsaliye </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="collapse show" id="order-despatches-collapse">
+                                                        <div class="d-grid rounded mt-3">
+                                                            <div class="card mb-4">
+                                                                <div class="card-body">
+                                                                    <div class="col-12">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="card bg-label-dribbble border border-dribbble">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <strong>Sipariş Bilgileri</strong>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <button type="button" class="btn btn-icon btn-sm btn-dribbble waves-effect waves-light">
+                                                                                                    <span class="ti-xs ti ti-receipt"></span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-12 mt-3">
+                                                                                    <div class="row">
+                                                                                        <div class="col-6">
+                                                                                            <div class="mb-2">
+                                                                                                <label class="form-label" for="order-date">Sipariş Tarihi</label>
+                                                                                                <div class="input-group input-group-merge">
+                                                                                                    <span class="input-group-text">
+                                                                                                        <i class="ti ti-calendar"></i>
+                                                                                                    </span>
+                                                                                                    <input id="order-date" type="text" class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-6">
+                                                                                            <div class="mb-2">
+                                                                                                <label class="form-label" for="order-no">Sipariş Numarası</label>
+                                                                                                <div class="input-group input-group-merge">
+                                                                                                    <span class="input-group-text">
+                                                                                                        <i class="ti ti-hash"></i>
+                                                                                                    </span>
+                                                                                                    <input id="order-no" type="text" class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="card bg-label-dribbble border border-dribbble">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <strong>İrsaliye Bilgileri</strong>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <button id="despatches-delete-selected" type="button" class="btn btn-icon btn-sm btn-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Seçili irsaliyeleri sil">
+                                                                                                    <span class="ti-xs ti ti-trash-x"></span>
+                                                                                                </button>
+                                                                                                <button id="despatches-add-row" type="button" class="btn btn-icon btn-sm btn-success waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Yeni İrsaliye">
+                                                                                                    <span class="ti-xs ti ti-plus"></span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-12 mt-3" style="height:120px;">
+                                                                                    <div id="despatches-grid" style="width: 100%; height: 100%;" class="ag-theme-balham rounded mt-1"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="lines-part" class="mt-2" style="display: none;">
+                                                    <div class="card bg-label-reddit">
+                                                        <div class="d-flex row" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#lines-collapse" aria-expanded="false" aria-controls="lines-collapse">
+                                                            <div class="card-body d-flex justify-content-between align-items-center">
+                                                                <div class="mx-4">
+                                                                    <div class="card-title mb-0">
+                                                                        <h5 class="mb-0">
+                                                                            <b>
+                                                                                <b id="line-counter">0</b> Kalem ve <b id="notes-counter">0</b> Not </b>
+                                                                        </h5>
+                                                                        <small id="payable-label">0</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-icon mx-4">
+                                                                    <span class="badge bg-reddit rounded-pill p-2"> Gövde </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="collapse show" id="lines-collapse">
+                                                        <div class="d-grid rounded mt-3">
+                                                            <div id="linesAlert" role="alert" style="display: none;">
+                                                                <h5 id="lineAlertHeader" class="alert-heading mb-2"></h5>
+                                                                <p id="lineAlertBody" class="mb-0"></p>
+                                                            </div>
+                                                            <div class="card mb-4">
+                                                                <div class="card-body">
+                                                                    <div class="card-title header-elements">
+                                                                        <h5 class="m-0 me-2"> Fatura Kalemleri </h5>
+                                                                        <div class="card-header-elements ms-auto">
+                                                                            <div class="btn-group" id="lines-collective-process-group" hidden="true">
+                                                                                <button type="button" class="btn btn-sm btn-info dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">Toplu İşlemler</button>
+                                                                                <ul class="dropdown-menu">
+                                                                                    <li>
+                                                                                        <a id="collective-delete" class="dropdown-item" href="javascript:void(0);">Sil</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <hr class="dropdown-divider">
+                                                                                    </li>
+                                                                                    <li id="collective-withholding-tax-btn" style="display: none;">
+                                                                                        <a id="collective-withholding-tax" class="dropdown-item" href="javascript:void(0);">Tevkifat Kodu Ekle</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a id="lines-taxes" class="dropdown-item" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#tax-collapse" aria-expanded="false" aria-controls="tax-collapse">Vergi Ekle</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a id="collective-discount" class="dropdown-item" href="javascript:void(0);">İskonto Ekle</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a id="collective-kdv-percent" class="dropdown-item" href="javascript:void(0);">KDV Oran Güncelle</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a id="collective-kdv-status" class="dropdown-item" href="javascript:void(0);">KDV Durum Güncelle</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <!-- <button id="lines-taxes" type="button" class="btn btn-sm btn-linkedin waves-effect waves-light" data-bs-toggle="collapse" data-bs-target="#tax-collapse" aria-expanded="false" aria-controls="tax-collapse">
+                                                                                Vergi İşlemleri
+                                                                            </button> -->
+                                                                            <button id="lines-add-row" type="button" class="btn btn-sm btn-success waves-effect waves-light">
+                                                                                <span class="ti-xs ti ti-plus me-1"></span> Yeni Satır
+                                                                            </button>
+                                                                            <!-- <button id="read-lines" type="button" class="btn btn-sm btn-success waves-effect waves-light">
+                                                                                <span class="ti-xs ti ti-plus me-1"></span> Satır Oku
+                                                                            </button> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="collapse" id="tax-collapse">
+                                                                            <div class="row">
+                                                                                <div class="col-4">
+                                                                                    <div class="mb-2">
+                                                                                        <label class="form-label" for="tax-select">Vergiler</label>
+                                                                                        <select id="tax-select" class="form-select form-select-sm w-auto"></select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-2">
+                                                                                    <div class="mb-2">
+                                                                                        <label class="form-label" for="tax-percent">Oranı</label>
+                                                                                        <div class="input-group input-group-merge">
+                                                                                            <span class="input-group-text">
+                                                                                                <i class="ti ti-percentage"></i>
+                                                                                            </span>
+                                                                                            <input id="tax-percent" type="text" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-3">
+                                                                                    <div class="mt-4 mb-2 d-grid">
+                                                                                        <button id="add-taxes-selected" class="btn btn-success waves-effect waves-effect">
+                                                                                            Seçili Kalemlere Ekle
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div id="lines-grid" style="width: 100%; height: 100%;" class="ag-theme-balham"></div>
+                                                                    </div>
+                                                                    <div class="col-12 mt-2">
+                                                                        <div class="row">
+                                                                            <div class="col-7">
+                                                                                <div class="card bg-label-primary border border-primary">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <strong>Notlar</strong>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <div class="btn-group">
+                                                                                                    <button type="button" class="btn btn-icon btn-sm btn-linkedin dropdown-toggle hide-arrow waves-effect waves-light me-2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                                        <span class="ti-xs ti ti-notes"></span>
+                                                                                                    </button>
+                                                                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                                                                        <li>
+                                                                                                            <h6 class="dropdown-header text-uppercase"> Hazır Notlar </h6>
+                                                                                                        </li>
+                                                                                                        <li>
+                                                                                                            <a class="dropdown-item default-notes" href="javascript:void(0);">İrsaliye yerine geçer.</a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                                <button id="notes-delete-selected" type="button" class="btn btn-icon btn-sm btn-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Seçili notları sil">
+                                                                                                    <span class="ti-xs ti ti-trash-x"></span>
+                                                                                                </button>
+                                                                                                <button id="notes-add-row" type="button" class="btn btn-icon btn-sm btn-success waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Yeni Not">
+                                                                                                    <span class="ti-xs ti ti-plus"></span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-12 mt-3" style="height:200px;">
+                                                                                    <div id="notes-grid" style="width: 100%; height: 100%;" class="ag-theme-balham rounded mt-1"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <div class="card bg-label-primary border border-primary">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <strong>Toplamlar</strong>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <button type="button" class="btn btn-icon btn-sm btn-primary waves-effect waves-light">
+                                                                                                    <span class="ti-xs ti ti-receipt"></span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card bg-white mt-3">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <small>
+                                                                                                    <b>Mal / Hizmet Toplam Tutarı</b>
+                                                                                                </small>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <span id="lineExtensionAmount" class="badge bg-label-linkedin rounded-pill p-2"> 0 </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="discountDiv" class="card bg-white mt-2">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <small>
+                                                                                                    <b>Toplam İskonto</b>
+                                                                                                </small>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <span id="discountAmount" class="badge bg-label-linkedin rounded-pill p-2"> 0 </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card bg-white mt-2">
+                                                                                    <div class="d-flex row" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#matrah-collapse" aria-expanded="false" aria-controls="matrah-collapse">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <small>
+                                                                                                    <i class="fa-solid fa-angles-down fa-beat-fade me-1"></i>
+                                                                                                    <b>Hesaplanan Matrah</b>
+                                                                                                </small>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <span id="kdvMatrahTotal" class="badge bg-label-linkedin rounded-pill p-2"> 0 </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="collapse" id="matrah-collapse">
+                                                                                    <div class="d-grid rounded mt-1">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body p-0">
+                                                                                                <div class="col-12">
+                                                                                                    <div class="table-responsive text-nowrap border border-1 rounded">
+                                                                                                        <table class="table table-striped table-sm">
+                                                                                                            <thead>
+                                                                                                                <tr>
+                                                                                                                    <th>Matrah Adı </th>
+                                                                                                                    <th>Tutarı </th>
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody class="table-border-bottom-0">
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 0 KDV Matrahı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv0Matrah"> 0 </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 1 KDV Matrahı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv1Matrah"> 0 </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 10 KDV Matrahı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv10Matrah"> 0 </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 20 KDV Matrahı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv20Matrah"> 0 </td>
+                                                                                                                </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card bg-white mt-2">
+                                                                                    <div class="d-flex row" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#kdv-collapse" aria-expanded="false" aria-controls="kdv-collapse">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <small>
+                                                                                                    <i class="fa-solid fa-angles-down fa-beat-fade me-1"></i>
+                                                                                                    <b>Hesaplanan KDV</b>
+                                                                                                </small>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <span id="kdvPriceTotal" class="badge bg-label-linkedin rounded-pill p-2"> 0 </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="collapse" id="kdv-collapse">
+                                                                                    <div class="d-grid rounded mt-1">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body p-0">
+                                                                                                <div class="col-12">
+                                                                                                    <div class="table-responsive text-nowrap border border-1 rounded">
+                                                                                                        <table class="table table-striped table-sm">
+                                                                                                            <thead>
+                                                                                                                <tr>
+                                                                                                                    <th>Vergi Adı </th>
+                                                                                                                    <th>Tutarı </th>
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody class="table-border-bottom-0">
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 0 KDV Tutarı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv0Tutar"> 0 </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 1 KDV Tutarı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv1Tutar"> 0 </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 10 KDV Tutarı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv10Tutar"> 0 </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <strong>% 20 KDV Tutarı</strong>
+                                                                                                                    </td>
+                                                                                                                    <td id="kdv20Tutar"> 0 </td>
+                                                                                                                </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="card bg-white mt-2" id="add-tax-div">
+                                                                                    <div class="d-flex row" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#addTaxes-collapse" aria-expanded="false" aria-controls="addTaxes-collapse">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <small>
+                                                                                                    <!-- <i class="fa-solid fa-angles-down fa-beat-fade me-1"></i> -->
+                                                                                                    <b>Hesaplanan Vergiler</b>
+                                                                                                </small>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <span id="addTaxesTotal" class="badge bg-label-linkedin rounded-pill p-2"> 0 </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="collapse" id="addTaxes-collapse">
+                                                                                    <div class="d-grid rounded mt-1">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body p-0">
+                                                                                                <div class="col-12">
+                                                                                                    <div class="table-responsive text-nowrap border border-1 rounded">
+                                                                                                        <table id="add-taxes-table" class="table table-striped table-sm">
+                                                                                                            <thead>
+                                                                                                                <tr>
+                                                                                                                    <th>Vergi Adı </th>
+                                                                                                                    <th>Tutarı </th>
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody class="table-border-bottom-0">
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="withholdingTaxDiv" class="card bg-white mt-2">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <small>
+                                                                                                    <b>Hesaplanan KDV Tevkifatı</b>
+                                                                                                </small>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <span id="withholdingTaxAmount" class="badge bg-label-linkedin rounded-pill p-2"> 0 </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card bg-white mt-2">
+                                                                                    <div class="d-flex row">
+                                                                                        <div class="card-body d-flex justify-content-between align-items-center p-2 px-4">
+                                                                                            <div class="card-title mb-0">
+                                                                                                <strong class="text-primary">Ödenecek Tutar</strong>
+                                                                                            </div>
+                                                                                            <div class="card-icon mx-1">
+                                                                                                <span id="payableAmount" class="badge bg-label-linkedin rounded-pill p-2"> 0 </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="edit-id" id="edit-id">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal animate__animated animate__fadeInDownBig" id="preview-invoice-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"> Fatura Önizlemesi</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex justify-content-center">
+                                        <iframe class="shadow-lg p-3 mb-5 bg-white rounded" id="invoiceFrame" width="900px" height="1080px"></iframe>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="print-invoice-in-preview" type="button" class="btn btn-primary waves-effect waves-light">
+                                            <i class="fa-solid fa-print"></i>&nbsp;&nbsp;Yazdır </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <!-- Footer --><%- include('../../partials/footer') %>
+                    <!-- / Footer -->
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+    </div><%- include('../../partials/theme_js') %>
+</body>
+
+</html>

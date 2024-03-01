@@ -1,0 +1,215 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <div class="layout-page">
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/invoices/waiting">Faturalar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/despatches/waiting">İrsaliyeler</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/sevouchers/waiting">SM Makbuzları</a>
+                            </li>
+                        </ul>
+                        <div class="card">
+                            <div class="card-body demo-only-element">
+                                <div class="row col-12 justify-content-end">
+                                    <div class="col-12 col-md-10 mt-md-0 mt-1 d-grid">
+                                        <h4 class="fw-bold py-1 mb-0">
+                                            <span class="text-muted fw-light">Taslak Belgeler /</span> Faturalar
+                                        </h4>
+                                    </div>
+                                    <div class="col-12 col-md-2 mt-md-0 mt-1 d-grid">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-label-linkedin dropdown-toggle hide-arrow waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-list fa-xs me-1"></i> Toplu İşlemler</button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a id="coll-mark-sended" class="dropdown-item" href="javascript:void(0);"><i class="fa-regular fa-square-check fa-lg me-2"></i>Gönderilmiş İşaretle</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a id="add-invoice-from-excel" class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-from-excel-modal"><i class="fa-regular fa-file-excel fa-lg me-2"></i>Excel'den Yükle</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="modal modal-top fade" id="add-from-excel-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalTopTitle">Faturaları Excelden Yükle</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col mb-2">
+                                                            <label for="invoice-excel-file" class="form-label">Excel Dosyası</label>
+                                                            <input class="form-control" type="file" id="invoice-excel-file" accept=".xlsx">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="add-from-excel-button" type="button" class="btn btn-primary waves-effect waves-light">Yükle</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 mt-3">
+                                    <div class="col-12 col-md-3 mt-1">
+                                        <label class="form-label" for="searchbox">Ara</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i style="font-size: 0.8rem;" class="fa-solid fa-magnifying-glass fa-xs"></i></span>
+                                            <input id="searchbox" type="text" class="form-control" placeholder="Ara...">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3 mt-1">
+                                        <label class="form-label" for="fdate">Başlangıç Tarihi</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i style="font-size: 0.8rem;" class="fa-regular fa-calendar-days fa-xs"></i></span>
+                                            <input id="fdate" type="text" class="form-control" placeholder="Başlangıç Tarihi">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3 mt-1">
+                                        <label class="form-label" for="ldate">Bitiş Tarihi</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i style="font-size: 0.8rem;" class="fa-regular fa-calendar-days fa-xs"></i></span>
+                                            <input id="ldate" type="text" class="form-control" placeholder="Bitiş Tarihi">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-1 mt-md-1 mt-2 d-grid pt-4">
+                                        <button id="search-button" type="button" class="btn btn-info waves-effect"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                    <% if(!permissions.documents.send_with_serie) { %>
+                                    <div class="col-6 col-md-2 mt-md-1 mt-2 d-grid pt-4">
+                                        <button id="send-selected" type="button" class="btn btn-success waves-effect">Gönder</button>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div id="table-div" class="card-datatable dataTable_select text-nowrap table-responsive">
+                                <table class="table" id="invoices">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Taslak No</th>
+                                            <th>Alıcı</th>
+                                            <th>vkntckn</th>
+                                            <th>Fatura</th>
+                                            <th>payable</th>
+                                            <th>currency</th>
+                                            <th>Profil</th>
+                                            <th>type</th>
+                                            <th>İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="modal animate__animated animate__fadeInDownBig" id="preview-invoice-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel5">Fatura Önizlemesi</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body d-flex justify-content-center">
+                                            <iframe class="shadow-lg p-3 mb-5 bg-white rounded" id="invoiceFrame" width="900px" height="1080px"></iframe>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="iframe-print" type="button" class="btn btn-primary waves-effect waves-light"><i class="fa-solid fa-print"></i>&nbsp;&nbsp;Yazdır</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal animate__animated animate__fadeInDownBig" id="barcode-etiket-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel5">Barkod Etiketi Önizlemesi</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body d-flex justify-content-center">
+                                            <iframe class="shadow-lg p-3 mb-5 bg-white rounded" id="barcodeFrame" width="900px" height="900px"></iframe>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="iframe-barcode-print" type="button" class="btn btn-primary waves-effect waves-light"><i class="fa-solid fa-print"></i>&nbsp;&nbsp;Yazdır</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal modal-top fade" id="edit-invoice-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalTopTitle"><b id="erp-no-header"></b> ERP Nolu Faturayı Düzenle</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" id="invoice-edit-id" class="form-control" hidden disabled>
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label for="invoice-time" class="form-label">Fatura Saati</label>
+                                                    <input type="text" id="invoice-time" class="form-control">
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <label for="invoice-profile" class="form-label">Fatura Profili</label>
+                                                    <select id="invoice-profile" class="form-select form-select-lg" data-allow-clear="true">
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <label for="invoice-type" class="form-label">Fatura Tipi</label>
+                                                    <select id="invoice-type" class="form-select form-select-lg" data-allow-clear="true">
+                                                    </select>
+                                                </div>
+                                                <div id="exemption-div" style="display: none;" class="col-12 mb-3">
+                                                    <label for="invoice-exemption-code" class="form-label">İstisna Kodu</label>
+                                                    <select id="invoice-exemption-code" class="form-select form-select-lg" data-allow-clear="true"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="edit-invoice-save" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <%- include('../../partials/footer') %>
+                    <div class="content-backdrop fade"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <div class="drag-target"></div>
+    </div>
+    <script>
+        let permissions = {
+            documents: {
+                send_with_serie: "<%= permissions.documents.send_with_serie %>" == 'true' ? true : false
+            }
+        };
+    </script>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>
+Ï

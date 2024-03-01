@@ -1,0 +1,205 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../databases/global"
+  engineType      = "binary"
+  previewFeatures = ["metrics"]
+}
+
+datasource db {
+  provider = "postgres"
+  url      = "postgres://USER:PASS@IP/NAME"
+}
+
+model Invoices {
+  id             Int       @id @default(autoincrement())
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  is_deleted     Boolean   @default(false)
+  deleted_at     DateTime?
+  external_id    String
+  external_refno String
+  external_type  String?
+  integrator     String
+  uuid           String    @unique
+  type           String
+  profile        String
+  doc_number     String?
+  serie          String
+  serie_reserved String?
+  number         BigInt?
+  template_id    Int
+  issue_date     DateTime?
+  customer_name  String?
+  customer_tax   String?
+  payable_amount String?
+  currency_code  String?
+  json           Json?
+  fresh_json     Json?
+  xml_path       String?
+  is_sended      Boolean   @default(false)
+  send_time      DateTime?
+  status_code    Int
+  status_detail  Json?
+
+  @@unique(fields: [external_type, external_id], name: "external_uniq")
+}
+
+model Despatches {
+  id             Int       @id @default(autoincrement())
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  is_deleted     Boolean   @default(false)
+  deleted_at     DateTime?
+  external_id    String
+  external_refno String
+  external_type  String?
+  integrator     String
+  uuid           String    @unique
+  type           String
+  profile        String
+  doc_number     String?
+  serie          String
+  serie_reserved String?
+  number         BigInt?
+  template_id    Int
+  issue_date     DateTime?
+  customer_name  String?
+  customer_tax   String?
+  plate_id       Int?
+  driver_id      Int?
+  carrier_id     Int?
+  json           Json?
+  fresh_json     Json?
+  xml_path       String?
+  is_sended      Boolean   @default(false)
+  send_time      DateTime?
+  status_code    Int
+  status_detail  Json?
+
+  @@unique(fields: [external_type, external_id], name: "external_uniq")
+}
+
+model Sevouchers {
+  id             Int       @id @default(autoincrement())
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  is_deleted     Boolean   @default(false)
+  deleted_at     DateTime?
+  external_id    String
+  external_refno String
+  external_type  String?
+  integrator     String
+  uuid           String    @unique
+  type           String
+  profile        String
+  doc_number     String?
+  serie          String
+  serie_reserved String?
+  number         BigInt?
+  template_id    Int
+  issue_date     DateTime?
+  customer_name  String?
+  customer_tax   String?
+  payable_amount String?
+  currency_code  String?
+  json           Json?
+  fresh_json     Json?
+  xml_path       String?
+  is_sended      Boolean   @default(false)
+  send_time      DateTime?
+  status_code    Int
+  status_detail  Json?
+
+  @@unique(fields: [external_type, external_id], name: "external_uniq")
+}
+
+model Preceipt {
+  id             Int       @id @default(autoincrement())
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  is_deleted     Boolean   @default(false)
+  deleted_at     DateTime?
+  external_id    String
+  external_refno String
+  external_type  String?
+  integrator     String
+  uuid           String    @unique
+  type           String
+  profile        String
+  doc_number     String?
+  serie          String
+  serie_reserved String?
+  number         BigInt?
+  template_id    Int
+  issue_date     DateTime?
+  customer_name  String?
+  customer_tax   String?
+  payable_amount String?
+  currency_code  String?
+  json           Json?
+  fresh_json     Json?
+  xml_path       String?
+  is_sended      Boolean   @default(false)
+  send_time      DateTime?
+  status_code    Int
+  status_detail  Json?
+
+  @@unique(fields: [external_type, external_id], name: "external_uniq")
+}
+
+model DespatchDefinitions {
+  id         Int       @id @default(autoincrement())
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  is_deleted Boolean   @default(false)
+  deleted_at DateTime?
+  default    Boolean   @default(false)
+  status     Boolean   @default(true)
+  key        String
+  value      Json
+}
+
+model Currents {
+  id           Int       @id @default(autoincrement())
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+  is_deleted   Boolean   @default(false)
+  deleted_at   DateTime?
+  status       Boolean   @default(true)
+  name         String?
+  tax_number   String?   @unique
+  tax_office   String?
+  address      String?
+  district     String?
+  city         String?
+  country      String?
+  phone_number String?
+  mail         String?
+  postal_code  String?
+  website      String?
+}
+
+model Parameters {
+  id         Int       @id @default(autoincrement())
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  is_deleted Boolean   @default(false)
+  deleted_at DateTime?
+  header     String
+  name       String
+  key        String
+  value      String?
+  array      Json?
+}
+
+model APILogs {
+  id                 Int       @id @default(autoincrement())
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
+  is_deleted         Boolean   @default(false)
+  deleted_at         DateTime?
+  url                String
+  body               Json
+  status             Int
+  status_description Json
+}

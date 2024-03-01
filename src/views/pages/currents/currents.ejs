@@ -1,0 +1,127 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="card">
+                            <div class="card-body demo-vertical-spacing demo-only-element pb-2">
+                                <div class="row col-12 justify-content-end">
+                                    <div class="col-12 col-md-6 mt-md-0 mt-1 d-grid">
+                                        <h4 class="fw-bold py-1 mb-0">
+                                            Cariler
+                                        </h4>
+                                    </div>
+                                    <div class="col-12 col-md-3 mt-md-0 mt-1 d-grid">
+                                    </div>
+                                    <div class="col-12 col-md-3 mt-md-0 mt-1 d-grid">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-label-linkedin dropdown-toggle hide-arrow waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-list fa-xs me-1"></i> Toplu İşlemler</button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a id="add-current-from-excel" class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-from-excel-modal"><i class="fa-regular fa-file-excel fa-xl me-2"></i>Excel'den Ekle</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="modal modal-top fade" id="add-from-excel-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalTopTitle">Carileri Excelden Yükle</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col mb-2">
+                                                            <label for="current-excel-file" class="form-label">Excel Dosyası</label>
+                                                            <input class="form-control" type="file" id="current-excel-file" accept=".xlsx">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="add-from-excel-button" type="button" class="btn btn-primary waves-effect waves-light">Yükle</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12">
+                                    <div class="col-12 col-md-9 mt-1">
+                                        <label class="form-label" for="searchbox">Ara</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i style="font-size: 0.8rem;" class="fa-solid fa-magnifying-glass fa-xs"></i></span>
+                                            <input id="searchbox" type="text" class="form-control" placeholder="Ara...">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mt-1 d-grid pt-4">
+                                        <button id="search-button" type="button" class="btn btn-linkedin waves-effect" data-loading-text="<i class='fas fa-spinner fa-pulse'></i> Doing a thing...">
+                                            <i class="fa-solid fa-magnifying-glass fa-xs me-1"></i> Ara
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="currents-div" class="card-datatable dataTable_select text-nowrap table-responsive">
+                                <table class="table table-xs" id="currents" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th style="font-size: 0.75rem;">Detay</th>
+                                            <th style="font-size: 0.75rem;">Ünvan</th>
+                                            <th style="font-size: 0.75rem;">Vergi/TC No</th>
+                                            <th style="font-size: 0.75rem;">Vergi Dairesi</th>
+                                            <th style="font-size: 0.75rem;">Adres</th>
+                                            <th style="font-size: 0.75rem;">il</th>
+                                            <th style="font-size: 0.75rem;">ilce</th>
+                                            <th style="font-size: 0.75rem;">İletişim</th>
+                                            <th style="font-size: 0.75rem;">mail</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    <%- include('../../partials/footer') %>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+    </div>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>

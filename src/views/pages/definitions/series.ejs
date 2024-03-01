@@ -1,0 +1,274 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <div class="layout-page">
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="nav-align-top nav-tabs-shadow mb-4">
+                            <ul class="nav nav-tabs nav-fill" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#einvoice-series" aria-controls="einvoice-series" aria-selected="true">
+                                        e-Fatura Serileri
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#earchive-series" aria-controls="earchive-series" aria-selected="false" tabindex="-1">
+                                        e-Arşiv Fatura Serileri
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#edespatch-series" aria-controls="edespatch-series" aria-selected="false" tabindex="-1">
+                                        e-İrsaliye Serileri
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#esevoucher-series" aria-controls="esevoucher-series" aria-selected="false" tabindex="-1">
+                                        e-SMM Serileri
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="einvoice-series" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="modal" data-bs-target="#einvoice-serie-modal">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-Fatura Serisi
+                                            </button>
+                                            <div class="modal modal-top fade" id="einvoice-serie-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-Fatura Serisi</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="einvoice-serie-name" class="form-label">Seri</label>
+                                                                    <input type="text" id="einvoice-serie-name" class="form-control" placeholder="Seri Kodu">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="einvoice-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="einvoice-save-serie" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="einvoice-series-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Seri Kodu</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="earchive-series" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="modal" data-bs-target="#earchive-serie-modal">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-Arşiv Serisi
+                                            </button>
+                                            <div class="modal modal-top fade" id="earchive-serie-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-Arşiv Fatura Serisi</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="earchive-serie-name" class="form-label">Seri</label>
+                                                                    <input type="text" id="earchive-serie-name" class="form-control" placeholder="Seri Kodu">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="earchive-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="earchive-save-serie" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="earchive-series-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Seri Kodu</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="edespatch-series" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="modal" data-bs-target="#edespatch-serie-modal">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-İrsaliye Serisi
+                                            </button>
+                                            <div class="modal modal-top fade" id="edespatch-serie-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-İrsaliye Serisi</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="edespatch-serie-name" class="form-label">Seri</label>
+                                                                    <input type="text" id="edespatch-serie-name" class="form-control" placeholder="Seri Kodu">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="edespatch-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="edespatch-save-serie" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="edespatch-series-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Seri Kodu</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="esevoucher-series" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="modal" data-bs-target="#esevoucher-serie-modal">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni e-SMM Serisi
+                                            </button>
+                                            <div class="modal modal-top fade" id="esevoucher-serie-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni e-SMM Serisi</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <label for="esevoucher-serie-name" class="form-label">Seri</label>
+                                                                    <input type="text" id="esevoucher-serie-name" class="form-control" placeholder="Seri Kodu">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="esevoucher-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="esevoucher-save-serie" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="esevoucher-series-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Seri Kodu</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <%- include('../../partials/footer') %>
+                    <div class="content-backdrop fade"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <div class="drag-target"></div>
+    </div>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>
+Ï

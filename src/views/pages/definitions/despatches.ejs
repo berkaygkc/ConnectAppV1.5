@@ -1,0 +1,204 @@
+<%- include('../../partials/doctype.ejs') %>
+
+<head>
+    <%- include('../../partials/header') %>
+    <title><%= page.display %> - <%= app.name %></title>
+    <%- include('../../partials/theme_css') %>
+</head>
+
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <% if(page.name != 'login' && page.name != '404') { %>
+            <%- include('../../partials/sidebar') %>
+            <% } %>
+            <div class="layout-page">
+                <% if(page.name != 'login' && page.name != '404') { %>
+                <%- include('../../partials/navbar') %>
+                <% } %>
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="nav-align-top nav-tabs-shadow mb-4">
+                            <ul class="nav nav-tabs nav-fill" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#drivers" aria-controls="drivers" aria-selected="true">
+                                        Şoför Tanımları
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#carriers" aria-controls="carriers" aria-selected="false" tabindex="-1">
+                                        Taşıyıcı Firma Tanımları
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="drivers" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="modal" data-bs-target="#driver-modal">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni Şoför Ekle
+                                            </button>
+                                            <div class="modal modal-top fade" id="driver-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni Şoför</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="driver-name" class="form-label">Şoför Adı</label>
+                                                                    <input type="text" id="driver-name" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="driver-surname" class="form-label">Şoför Soyadı</label>
+                                                                    <input type="text" id="driver-surname" class="form-control">
+                                                                </div>
+                                                                <div class="col-12 mb-5">
+                                                                    <label for="driver-id" class="form-label">Şoför TC Kimlik No</label>
+                                                                    <input type="text" id="driver-id" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="driver-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="driver-save" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="drivers-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Adı Soyadı</th>
+                                                <th>TC Kimlik No</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="carriers" role="tabpanel">
+                                    <div class="row col-12 justify-content-end">
+                                        <div class="col-6 col-md-3 mt-md-0 mt-1 d-grid">
+                                            <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="modal" data-bs-target="#carrier-modal">
+                                                <i class="fa-solid fa-plus me-1"></i> Yeni Taşıyıcı Firma Ekle
+                                            </button>
+                                            <div class="modal modal-top fade" id="carrier-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTopTitle">Yeni Taşıyıcı Firma</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-12 mb-3">
+                                                                    <label for="carrier-name" class="form-label">Ünvan</label>
+                                                                    <input type="text" id="carrier-name" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-taxnumber" class="form-label">Vergi/TC No</label>
+                                                                    <input type="text" id="carrier-taxnumber" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-taxoffice" class="form-label">Vergi Dairesi</label>
+                                                                    <input type="text" id="carrier-taxoffice" class="form-control">
+                                                                </div>
+                                                                <div class="col-12 mb-3">
+                                                                    <label for="carrier-address" class="form-label">Adres</label>
+                                                                    <input type="text" id="carrier-address" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-city" class="form-label">İl</label>
+                                                                    <input type="text" id="carrier-city" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-district" class="form-label">İlçe</label>
+                                                                    <input type="text" id="carrier-district" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-country" class="form-label">Ülke</label>
+                                                                    <input type="text" id="carrier-country" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-postal" class="form-label">Posta Kodu</label>
+                                                                    <input type="text" id="carrier-postal" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-phone" class="form-label">Telefon No</label>
+                                                                    <input type="text" id="carrier-phone" class="form-control">
+                                                                </div>
+                                                                <div class="col-6 mb-3">
+                                                                    <label for="carrier-mail" class="form-label">Mail Adresi</label>
+                                                                    <input type="text" id="carrier-mail" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label class="switch switch-square">
+                                                                        <input id="carrier-isdefault" type="checkbox" class="switch-input" />
+                                                                        <span class="switch-toggle-slider">
+                                                                            <span class="switch-on"><i class="ti ti-check"></i></span>
+                                                                            <span class="switch-off"><i class="ti ti-x"></i></span>
+                                                                        </span>
+                                                                        <span class="switch-label">Varsayılan</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="carrier-save" type="button" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="carriers-table" class="table table-hover card-table">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Ünvan</th>
+                                                <th>Vergi/TC Kimlik No</th>
+                                                <th>Varsayılan</th>
+                                                <th>Durum</th>
+                                                <th>İşlem</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <%- include('../../partials/footer') %>
+                    <div class="content-backdrop fade"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <div class="drag-target"></div>
+    </div>
+    <%- include('../../partials/theme_js') %>
+</body>
+
+</html>
+Ï

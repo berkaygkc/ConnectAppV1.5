@@ -1,0 +1,302 @@
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="index.html" class="app-brand-link">
+            <span class="app-brand-logo demo">
+                <img src="<%= app.logo %>" />
+            </span>
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <!-- Page -->
+        <li class="menu-item" id="dashboard-nav">
+            <a href="/" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-home-2"></i>
+                <div>Ana Sayfa</div>
+            </a>
+        </li>
+        <% if(permissions.documents.create) { %>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">İşlemler</span>
+        </li>
+        <li class="menu-item" id="documents-upnav">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-cash"></i>
+                <div>Belge İşlemleri</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item" id="create-nav">
+                    <a type="button" href="#" class="menu-link" data-bs-toggle="modal" data-bs-target="#createModal">
+                        <div>Belge Oluştur</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="waiting-nav">
+                    <a href="/invoices/waiting" class="menu-link">
+                        <div>Taslak Belgeler</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="sended-nav">
+                    <a href="/invoices/sended" class="menu-link">
+                        <div>Gönderilmiş Belgeler</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <% } %>
+        <!-- <li class="menu-item" id="invoices-upnav">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-cash"></i>
+                <div>Fatura İşlemleri</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item" id="invoices-waiting-nav">
+                    <a href="/invoices/waiting" class="menu-link">
+                        <div>Fatura Oluştur</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="invoices-sended-nav">
+                    <a href="/invoices/sended" class="menu-link">
+                        <div>Gönderilmiş Faturalar</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item" id="despatches-upnav">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-truck"></i>
+                <div>İrsaliye İşlemleri</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item" id="despatches-waiting-nav">
+                    <a href="/despatches/waiting" class="menu-link">
+                        <div>İrsaliye Oluştur</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="despatches-sended-nav">
+                    <a href="/despatches/sended" class="menu-link">
+                        <div>Gönderilmiş İrsaliyeler</div>
+                    </a>
+                </li>
+            </ul>
+        </li> -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Hareketler</span>
+        </li>
+        <li class="menu-item" id="outgoing-nav">
+            <a href="/outgoing/einvoices" class="menu-link">
+                <i class="menu-icon ti ti-arrow-autofit-up"></i>
+                <div>Giden Kutusu</div>
+            </a>
+        </li>
+        <li class="menu-item" id="incoming-nav">
+            <a href="/incoming/einvoices" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-arrow-autofit-down"></i>
+                <div>Gelen Kutusu</div>
+            </a>
+        </li>
+        <!-- <li class="menu-item" id="outgoing-upnav">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon ti ti-arrow-autofit-up"></i>
+                <div>Giden Kutusu</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item" id="outgoing-einvoices-nav">
+                    <a href="/outgoing/einvoices" class="menu-link">
+                        <div>Giden e-Fatura</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="outgoing-earchives-nav">
+                    <a href="/outgoing/earchives" class="menu-link">
+                        <div>Giden e-Arşiv</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="outgoing-edespatches-nav">
+                    <a href="/outgoing/edespatches" class="menu-link">
+                        <div>Giden e-İrsaliye</div>
+                    </a>
+                </li>
+            </ul>
+        </li> -->
+        <!-- <li class="menu-item" id="incoming-upnav">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-arrow-autofit-down"></i>
+                <div>Gelen Kutusu</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item" id="incoming-einvoices-nav">
+                    <a href="/incoming/einvoices" class="menu-link">
+                        <div>Gelen e-Fatura</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="incoming-edespatches-nav">
+                    <a href="/incoming/edespatches" class="menu-link">
+                        <div>Gelen e-İrsaliye</div>
+                    </a>
+                </li>
+            </ul>
+        </li> -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Ayarlar</span>
+        </li>
+        <li class="menu-item" id="definitions-upnav">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-category-2"></i>
+                <div>Tanımlamalar</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item" id="definitions-series-nav">
+                    <a href="/definitions/series" class="menu-link">
+                        <div>Seriler</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="definitions-templates-nav">
+                    <a href="/definitions/templates" class="menu-link">
+                        <div>Şablonlar</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="definitions-despatches-nav">
+                    <a href="/definitions/despatches" class="menu-link">
+                        <div>İrsaliye Tanımları</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item" id="currents-nav">
+            <a href="/currents" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>Cariler</div>
+            </a>
+        </li>
+        <li class="menu-item" id="reports-nav">
+            <a href="/reports" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-file-report"></i>
+                <div>Raporlar</div>
+            </a>
+        </li>
+    </ul>
+</aside>
+<div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalTitle">
+                    Belge türünü seçiniz...
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        <div class="form-check custom-option custom-option-basic">
+                            <label class="form-check-label custom-option-content" for="create-invoice">
+                                <input name="create-document-option" class="form-check-input" type="radio" value="" id="create-invoice" checked />
+                                <span class="custom-option-header">
+                                    <span class="h6 mb-0"> Fatura</span>
+                                </span>
+                                <span class="custom-option-body">
+                                    <small>e-Fatura, e-Arşiv Fatura</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <div class="form-check custom-option custom-option-basic">
+                            <label class="form-check-label custom-option-content" for="create-export">
+                                <input name="create-document-option" class="form-check-input" type="radio" value="" id="create-export" />
+                                <span class="custom-option-header">
+                                    <span class="h6 mb-0">
+                                        İhracat Faturası</span>
+                                </span>
+                                <span class="custom-option-body">
+                                    <small>GTİP Numaralı İhracat Faturası</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <div class="form-check custom-option custom-option-basic">
+                            <label class="form-check-label custom-option-content" for="create-despatch">
+                                <input name="create-document-option" class="form-check-input" type="radio" value="" id="create-despatch" />
+                                <span class="custom-option-header">
+                                    <span class="h6 mb-0">
+                                        İrsaliye</span>
+                                </span>
+                                <span class="custom-option-body">
+                                    <small>e-İrsaliye</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check custom-option custom-option-basic">
+                            <label class="form-check-label custom-option-content" for="create-sevoucher">
+                                <input name="create-document-option" class="form-check-input" type="radio" value="" id="create-sevoucher" />
+                                <span class="custom-option-header">
+                                    <span class="h6 mb-0"> Serbest Meslek Makbuzu</span>
+                                </span>
+                                <span class="custom-option-body">
+                                    <small>e-SMM</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-12">
+                        <div class="form-check custom-option custom-option-basic">
+                            <label class="form-check-label custom-option-content" for="create-despatch">
+                                <input name="create-document-option" class="form-check-input" type="radio" value="" id="create-despatch" />
+                                <span class="custom-option-header">
+                                    <span class="h6 mb-0"> İrsaliye</span>
+                                </span>
+                                <span class="custom-option-body">
+                                    <small>e-İrsaliye, Sevk İrsaliyesi</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="create-document" type="button" class="btn btn-primary">
+                    Belge Oluştur
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document
+        .getElementById("create-document")
+        .addEventListener("click", (e) => {
+            let selectedValue = document.querySelector(
+                'input[name="create-document-option"]:checked'
+            ).id;
+            switch (selectedValue) {
+                case "create-invoice":
+                    window.location = "/create/invoice";
+                    break;
+                case "create-export":
+                    window.location = "/create/invoice/export";
+                    break;
+                case "create-despatch":
+                    window.location = "/create/despatch";
+                    break;
+                case "create-sevoucher":
+                    window.location = "/create/sevoucher";
+                    break;
+                    // case "create-despatch":
+                    //     window.location = '/create/despatch'
+                    //     break;
+                default:
+                    break;
+            }
+        });
+</script>

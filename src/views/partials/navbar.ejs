@@ -1,0 +1,88 @@
+<%- include('./loader') %>
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="ti ti-menu-2 ti-sm"></i>
+        </a>
+    </div>
+
+    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        <div class="navbar-nav align-items-center">
+            <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                    <i class='ti ti-layout-grid-add ti-md'></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-start py-0">
+                    <div class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h5 class="text-body mb-0 me-auto">Uygulamalar</h5>
+                        </div>
+                    </div>
+                    <div class="dropdown-shortcuts-list scrollable-container">
+                        <% apps.forEach(url => { %>
+                        <div class="row row-bordered overflow-visible g-0">
+                            <div class="dropdown-shortcuts-item col">
+                                <span class="dropdown-shortcuts-icon rounded-circle mb-2">
+                                    <i class="<%= url.logo %>"></i>
+                                </span>
+                                <a href="<%= url.url %>" target="_blank" class="stretched-link"><%= url.name %></a>
+                                <small class="text-muted mb-0"><%= url.description %></small>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </li>
+
+        </div>
+
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <div class="navbar-nav align-items-center">
+                <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">
+                    <i class="ti ti-sm me-3"></i>
+                </a>
+            </div>
+            <!-- User -->
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="avatar">
+                        <span class="avatar-initial rounded-circle bg-label-primary"><%- String(company.name).substring(0,1) %><%- String(company.name).split(" ")[1].substring(0,1) %></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="avatar">
+                                        <span class="avatar-initial rounded-circle bg-label-primary"><%- String(company.name).substring(0,1) %><%- String(company.name).split(" ")[1].substring(0,1) %></span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <span class="fw-semibold d-block"><%= company.name %></span>
+                                    <small class="text-muted"><%= company.tax_number %></small>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="ti ti-user-check me-2 ti-sm"></i>
+                            <span class="align-middle">Profil</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/account/logout">
+                            <i class="ti ti-logout me-2 ti-sm"></i>
+                            <span class="align-middle">Çıkış Yap</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--/ User -->
+        </ul>
+    </div>
+</nav>

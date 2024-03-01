@@ -1,0 +1,139 @@
+<!-- BEGIN: Main Menu-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item me-auto">
+                <a class="navbar-brand" href="/">
+                    <span class="brand-logo d-flex align-item-center">
+                        <img src="<%= app.logo %>" />
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item nav-toggle">
+                <a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4 text-primary" data-feather="disc" data-ticon="disc"></i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="nav-item" id="dashboard-nav">
+                <a class="d-flex align-items-center" href="/">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="menu-title text-truncate">Kontrol Paneli</span>
+                </a>
+            </li>
+            <li class="navigation-header">
+                <span>İşlemler</span>
+                <i data-feather="more-horizontal"></i>
+            </li>
+            <li class="nav-item" id="invoices-upnav">
+                <a class="d-flex align-items-center" href="#">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span class="menu-title text-truncate">Fatura İşlemleri</span>
+                </a>
+                <ul class="menu-content">
+                    <li id="invoices-waiting-nav">
+                        <a class="d-flex align-items-center" href="/invoices/waiting">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <span class="menu-item text-truncate">Fatura Oluştur</span>
+                        </a>
+                    </li>
+                    <li id="invoices-sended-nav">
+                        <a class="d-flex align-items-center" href="/invoices/sended">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span class="menu-item text-truncate">Gönderilmiş Faturalar</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" id="despatches-upnav">
+                <a class="d-flex align-items-center" href="#">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span class="menu-title text-truncate">İrsaliye İşlemleri</span>
+                </a>
+                <ul class="menu-content">
+                    <li id="despatches-waiting-nav">
+                        <a class="d-flex align-items-center" href="/despatches/waiting">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="List">İrsaliye Oluştur</span>
+                        </a>
+                    </li>
+                    <li id="despatches-sended-nav">
+                        <a class="d-flex align-items-center" href="/despatches/sended">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="List">Gönderilmiş İrsaliye</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="navigation-header">
+                <span>Hareketler</span>
+                <i data-feather="more-horizontal"></i>
+            </li>
+            <li class="nav-item" id="outgoing-upnav">
+                <a class="d-flex align-items-center" href="#">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span class="menu-title text-truncate">Giden Kutusu</span>
+                </a>
+                <ul class="menu-content">
+                    <li id="outgoing-einvoices-nav">
+                        <a class="d-flex align-items-center" href="/outgoing/einvoices">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <span class="menu-item text-truncate">Giden e-Fatura</span>
+                        </a>
+                    </li>
+                    <li id="outgoing-earchives-nav">
+                        <a class="d-flex align-items-center" href="/outgoing/earchives">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <span class="menu-item text-truncate">Giden e-Arşiv</span>
+                        </a>
+                    </li>
+                    <li id="outgoing-edespatches-nav">
+                        <a class="d-flex align-items-center" href="/outgoing/edespatches">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <span class="menu-item text-truncate">Giden e-İrsaliye</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" id="incoming-upnav">
+                <a class="d-flex align-items-center" href="#">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <span class="menu-title text-truncate">Gelen Kutusu</span>
+                </a>
+                <ul class="menu-content">
+                    <li id="incoming-einvoices-nav">
+                        <a class="d-flex align-items-center" href="/incoming/einvoices">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <span class="menu-item text-truncate">Gelen e-Fatura</span>
+                        </a>
+                    </li>
+                    <li id="incoming-earchives-nav">
+                        <a class="d-flex align-items-center" href="/incoming/earchives">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <span class="menu-item text-truncate">Gelen e-Arşiv</span>
+                        </a>
+                    </li>
+                    <li id="incoming-edespatches-nav">
+                        <a class="d-flex align-items-center" href="/incoming/edespatches">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <span class="menu-item text-truncate">Gelen e-İrsaliye</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="navigation-header">
+                <span>Tanımlamalar</span>
+                <i data-feather="more-horizontal"></i>
+            </li>
+            <li class="nav-item" id="def-params-nav">
+                <a class="d-flex align-items-center" href="/definitions/params">
+                    <i class="fa-solid fa-folder-tree"></i>
+                    <span class="menu-title text-truncate">Parametreler</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END: Main Menu-->
